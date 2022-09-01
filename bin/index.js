@@ -2,8 +2,10 @@
 
 const program = require('commander');
 const chalk = require('chalk');
-const { createProjectAction } = require('../lib/actions/createProjectAction');
-const addPageAction = require('../lib/actions/addComponentAction');
+const {
+  createProjectAction,
+} = require('../lib/core/actions/createProjectAction');
+const addPageAction = require('../lib/core/actions/addComponentAction');
 const helpOptions = require('../lib/core/help');
 const { validateArgsLen } = require('../lib/utils/validateArgsLen');
 
