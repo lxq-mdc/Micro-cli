@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const {
   createProjectAction,
 } = require('../lib/core/actions/createProjectAction');
-const addPageAction = require('../lib/core/actions/addComponentAction');
+const addComponentAction = require('../lib/core/actions/addComponentAction');
 const helpOptions = require('../lib/core/help');
 const { validateArgsLen } = require('../lib/utils/validateArgsLen');
 
@@ -31,7 +31,7 @@ program
   .description('add page from template')
   .option('-f,--force', 'overwrite target directory if it exists')
   .action((pageName, options) => {
-    addPageAction(pageName, options, `src/pages`);
+    addComponentAction(pageName, options, `src/pages`);
   });
 
 /**  @description 添加component */
@@ -40,7 +40,7 @@ program
   .description('add component from template')
   .option('-f,--force', 'overwrite target directory if it exists')
   .action((pageName, options) => {
-    addPageAction(pageName, options, `src/components`);
+    addComponentAction(pageName, options, `src/components`);
   });
 
 program.parse(process.argv);
