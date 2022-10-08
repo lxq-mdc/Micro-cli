@@ -2,11 +2,8 @@
   "name": "@m-cli/create",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
-  "bin": {
-    "m": "./index.js"
-  },
   "keywords": [],
   "author": "",
   "license": "MIT",

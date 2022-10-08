@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": " unbuild --stub",
-    "build": "unbuild",
-    "dev:core": "pnpm start --filter \"core\"",
-    "prepare": "husky install"
+    "dev:core": "pnpm --filter \"@m-cli/core\" run dev"
   },
   "keywords": [],
   "author": "",
