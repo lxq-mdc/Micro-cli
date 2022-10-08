@@ -1,0 +1,16 @@
+{
+  "name": "@m-cli/create",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "m": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@m-cli/shared-utils": "workspace:*"
+  }
+}

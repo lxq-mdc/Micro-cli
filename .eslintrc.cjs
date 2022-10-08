@@ -13,5 +13,24 @@ module.exports = {
   rules: {
     'no-console': 0,
     'max-len': 0,
+    'import/extensions': [
+      // 这个是解决不写后缀报错的问题
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        ts: 'never',
+        json: 'never',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
+    'import/no-extraneous-dependencies': 'off',
   },
 };

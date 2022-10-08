@@ -1,0 +1,16 @@
+{
+  "name": "@m-cli/shared-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "npmlog": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/npmlog": "^4.1.4"
+  }
+}
