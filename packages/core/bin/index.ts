@@ -3,6 +3,7 @@ import { program } from 'commander';
 import { chalk, semver } from '@m-cli/shared-utils';
 import create from '@m-cli/create/index';
 import minimist from 'minimist';
+import add from '@m-cli/add';
 import type { OptionsTypes } from '../types';
 
 const requiredVersion = require('../package.json').engines.node;
