@@ -1,14 +1,9 @@
 {
-  "name": "@m-cli/core",
+  "name": "@m-cli/create",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
-  "private": "true",
-  "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild"
-  },
   "bin": {
     "m": "./index.js"
   },
@@ -16,15 +11,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@m-cli/create": "workspace:*",
+    "@m-cli/cli-plugin-eslint": "workspace:^1.0.0",
+    "@m-cli/core": "workspace:^1.0.0",
     "@m-cli/shared-utils": "workspace:*",
     "@types/fs-extra": "^9.0.13",
-    "@types/minimist": "^1.2.2",
+    "@types/inquirer": "^9.0.2",
+    "@types/validate-npm-package-name": "^4.0.0",
     "fs-extra": "^10.1.0",
-    "minimist": "^1.2.6"
+    "inquirer": "8.0.0",
+    "validate-npm-package-name": "^4.0.0"
   },
-  "engines": {
-    "node": "^12.0.0 || >= 14.0.0"
-  },
-  "types": "./index.d.ts"
+  "types": "./types/index.ts"
 }

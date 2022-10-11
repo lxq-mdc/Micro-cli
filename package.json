@@ -1,27 +1,64 @@
 {
-    "name": "mcli",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "bin": {
-        "m": "./bin/index.js"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "chalk": "2.4.2",
-        "clear": "^0.1.0",
-        "commander": "^9.4.0",
-        "download-git-repo": "^3.0.2",
-        "ejs": "^3.1.8",
-        "figlet": "^1.5.2",
-        "fs-extra": "^10.1.0",
-        "inquirer": "8.0.0",
-        "open": "^8.4.0",
-        "ora": "^6.1.2"
+  "name": "m-cli",
+  "version": "1.2.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": " unbuild --stub",
+    "build": "unbuild",
+    "dev:core": "pnpm start --filter \"core\"",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "2.4.2",
+    "clear": "^0.1.0",
+    "commander": "^9.4.0",
+    "download-git-repo": "^3.0.2",
+    "ejs": "^3.1.8",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "8.0.0",
+    "open": "^8.4.0",
+    "ora": "^6.1.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4",
+    "unbuild": "^0.8.11"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "lib/**/*.ts": [
+      "eslint --cache --fix"
+    ],
+    "lib/**/*.js": [
+      "eslint --cache --fix"
+    ],
+    "lib/**/*.d.ts": [
+      "eslint --cache --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }
