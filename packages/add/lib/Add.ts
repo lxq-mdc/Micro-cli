@@ -6,7 +6,8 @@ import {
   successLogWithBg,
   ensureDir,
   ensureFile,
-  renderFile,
+  compile,
+  writeToFile,
 } from '@m-cli/shared-utils';
 
 export default async (componentName: string, options: {}, pathName: string) => {
@@ -18,26 +19,23 @@ export default async (componentName: string, options: {}, pathName: string) => {
   switch (type) {
     case 'Vue': {
       if (!(await ensureFile(`${dirName}.vue`, options))) return; // 确保所需文件，如果有相同名字的，则向用户询问是否覆盖，以保证下面的操作可以进行，若不覆盖，则不执行下面的操作
-      await renderFile('vue-component.ejs', `${dirName}.vue`, {
+      const vue = await compile('vue-component.ejs', {
         name: componentName,
         isTypescript: await isTypescript(),
       });
+      await writeToFile(`${dirName}.vue`, vue);
       break;
     }
     case 'React': {
       if (!(await ensureDir(dirName, options))) return; // 确保所需目录，如果有相同名字的，则向用户询问是否覆盖，以保证下面的操作可以进行，若不覆盖，则不执行下面的操作
       const isTs = await isTypescript();
-      await renderFile(
-        'react-component.ejs',
-        `${dirName}/index.${isTs ? 'tsx' : 'jsx'}`,
-        {
-          name: componentName,
-          isTypescript: isTs,
-        }
-      );
-      await renderFile('react-style.ejs', `${dirName}/index.module.less`, {
+      const xml = await compile('react-component.ejs', {
         name: componentName,
+        isTypescript: isTs,
       });
+      const style = await compile('react-style.ejs', { name: componentName });
+      await writeToFile(`${dirName}/index.${isTs ? 'tsx' : 'jsx'}`, xml);
+      await writeToFile(`${dirName}/index.module.less`, style);
       break;
     }
     default:

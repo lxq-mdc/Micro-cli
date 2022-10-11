@@ -5,6 +5,7 @@ importers:
     specifiers:
       '@types/fs-extra': ^9.0.13
       '@types/inquirer': ^9.0.2
+      '@types/minimist': ^1.2.2
       '@types/node': ^18.8.3
       '@typescript-eslint/eslint-plugin': ^5.39.0
       '@typescript-eslint/parser': ^5.39.0
@@ -41,6 +42,7 @@ importers:
     devDependencies:
       '@types/fs-extra': 9.0.13
       '@types/inquirer': 9.0.2
+      '@types/minimist': 1.2.2
       '@types/node': 18.8.3
       '@typescript-eslint/eslint-plugin': 5.39.0_hmgqbu7m6n6spoygjbdwd2nnbi
       '@typescript-eslint/parser': 5.39.0_3rubbgt5ekhqrcgx4uwls3neim
@@ -122,7 +124,6 @@ importers:
     dependencies:
       '@m-cli/cli-plugin-eslint': link:../cli-plugin-eslint
       '@types/chalk': 2.2.0
-      '@types/semver': 7.3.12
       chalk: 2.4.2
       ejs: 3.1.8
       npmlog: 6.0.2
@@ -130,6 +131,7 @@ importers:
     devDependencies:
       '@types/ejs': 3.1.1
       '@types/npmlog': 4.1.4
+      '@types/semver': 7.3.12
 
 packages:
   /@ampproject/remapping/2.2.0:
@@ -892,7 +894,6 @@ packages:
       {
         integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==,
       }
-    dev: false
 
   /@types/node/14.18.31:
     resolution:
@@ -946,7 +947,7 @@ packages:
       {
         integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==,
       }
-    dev: false
+    dev: true
 
   /@types/through/0.0.30:
     resolution:
