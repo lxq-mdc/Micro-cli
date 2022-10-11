@@ -4,10 +4,10 @@ importers:
   .:
     specifiers:
       '@types/fs-extra': ^9.0.13
+      '@types/inquirer': ^9.0.2
       '@types/node': ^18.8.3
       '@typescript-eslint/eslint-plugin': ^5.39.0
       '@typescript-eslint/parser': ^5.39.0
-      chalk: 2.4.2
       clear: ^0.1.0
       commander: ^9.4.0
       cz-conventional-changelog: ^3.3.0
@@ -29,7 +29,6 @@ importers:
       typescript: ^4.8.4
       unbuild: ^0.8.11
     dependencies:
-      chalk: 2.4.2
       clear: 0.1.0
       commander: 9.4.0
       download-git-repo: 3.0.2
@@ -41,6 +40,7 @@ importers:
       ora: 6.1.2
     devDependencies:
       '@types/fs-extra': 9.0.13
+      '@types/inquirer': 9.0.2
       '@types/node': 18.8.3
       '@typescript-eslint/eslint-plugin': 5.39.0_hmgqbu7m6n6spoygjbdwd2nnbi
       '@typescript-eslint/parser': 5.39.0_3rubbgt5ekhqrcgx4uwls3neim
@@ -64,9 +64,11 @@ importers:
 
   packages/core:
     specifiers:
+      '@m-cli/add': workspace:*
       '@m-cli/create': workspace:*
       '@m-cli/shared-utils': workspace:*
     dependencies:
+      '@m-cli/add': link:../add
       '@m-cli/create': link:../create
       '@m-cli/shared-utils': link:../shared-utils
 
@@ -787,6 +789,16 @@ packages:
       '@types/node': 18.8.3
     dev: true
 
+  /@types/inquirer/9.0.2:
+    resolution:
+      {
+        integrity: sha512-MQc3adiIh/rDxLkjnvL03rSvuHg+/dKif4dn/MRsnE+oU1bAdyuDbW0w+ewR1M/M/u/Z0YAbw7NZYCpgQ5SW8A==,
+      }
+    dependencies:
+      '@types/through': 0.0.30
+      rxjs: 7.5.7
+    dev: true
+
   /@types/json-schema/7.0.11:
     resolution:
       {
@@ -856,6 +868,15 @@ packages:
     dependencies:
       '@types/node': 18.8.3
     dev: false
+
+  /@types/through/0.0.30:
+    resolution:
+      {
+        integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==,
+      }
+    dependencies:
+      '@types/node': 18.8.3
+    dev: true
 
   /@typescript-eslint/eslint-plugin/5.39.0_hmgqbu7m6n6spoygjbdwd2nnbi:
     resolution:
@@ -1119,6 +1140,7 @@ packages:
     engines: { node: '>=4' }
     dependencies:
       color-convert: 1.9.3
+    dev: true
 
   /ansi-styles/4.3.0:
     resolution:
@@ -1455,6 +1477,7 @@ packages:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
+    dev: true
 
   /chalk/4.1.2:
     resolution:
@@ -1572,6 +1595,7 @@ packages:
       }
     dependencies:
       color-name: 1.1.3
+    dev: true
 
   /color-convert/2.0.1:
     resolution:
@@ -1587,6 +1611,7 @@ packages:
       {
         integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==,
       }
+    dev: true
 
   /color-name/1.1.4:
     resolution:
@@ -3711,6 +3736,7 @@ packages:
         integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==,
       }
     engines: { node: '>=4' }
+    dev: true
 
   /has-flag/4.0.0:
     resolution:
@@ -5938,6 +5964,7 @@ packages:
     engines: { node: '>=4' }
     dependencies:
       has-flag: 3.0.0
+    dev: true
 
   /supports-color/7.2.0:
     resolution:

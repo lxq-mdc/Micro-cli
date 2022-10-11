@@ -15,6 +15,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@m-cli/add": "workspace:*",
     "@m-cli/create": "workspace:*",
     "@m-cli/shared-utils": "workspace:*"
   }
