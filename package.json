@@ -4,17 +4,16 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": " unbuild --stub",
-    "build": "unbuild",
-    "dev:core": "pnpm start --filter \"core\"",
-    "prepare": "husky install"
+    "dev:core": "pnpm --filter \"@m-cli/core\" run dev"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "chalk": "2.4.2",
     "clear": "^0.1.0",
     "commander": "^9.4.0",
     "download-git-repo": "^3.0.2",
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^9.0.2",
     "@types/node": "^18.8.3",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",

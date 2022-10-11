@@ -23,6 +23,7 @@ module.exports = {
         json: 'never',
       },
     ],
+    'import/no-extraneous-dependencies': 'off',
   },
   settings: {
     'import/resolver': {
@@ -31,6 +32,5 @@ module.exports = {
         moduleDirectory: ['node_modules', 'src/'],
       },
     },
-    'import/no-extraneous-dependencies': 'off',
   },
 };

@@ -1,0 +1,13 @@
+{
+  "name": "@m-cli/add",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@m-cli/shared-utils": "workspace:*"
+  }
+}

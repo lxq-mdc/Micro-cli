@@ -41,8 +41,8 @@ program
   .command('addPage <page-name>')
   .description('add page from template')
   .option('-f,--force', 'overwrite target directory if it exists')
-  .action((projectName) => {
-    console.log('projectName', projectName);
+  .action((projectName, options) => {
+    add(projectName, options, 'src/pages');
   });
 
 /**  @description 添加 component */
@@ -50,8 +50,8 @@ program
   .command('addComponent <page-name>')
   .description('add component from template')
   .option('-f,--force', 'overwrite target directory if it exists')
-  .action((projectName) => {
-    console.log('projectName', projectName);
+  .action((projectName, options) => {
+    add(projectName, options, 'src/components');
   });
 
 program.parse(process.argv);
