@@ -5,6 +5,7 @@ importers:
     specifiers:
       '@types/fs-extra': ^9.0.13
       '@types/inquirer': ^9.0.2
+      '@types/minimist': ^1.2.2
       '@types/node': ^18.8.3
       '@typescript-eslint/eslint-plugin': ^5.39.0
       '@typescript-eslint/parser': ^5.39.0
@@ -41,6 +42,7 @@ importers:
     devDependencies:
       '@types/fs-extra': 9.0.13
       '@types/inquirer': 9.0.2
+      '@types/minimist': 1.2.2
       '@types/node': 18.8.3
       '@typescript-eslint/eslint-plugin': 5.39.0_hmgqbu7m6n6spoygjbdwd2nnbi
       '@typescript-eslint/parser': 5.39.0_3rubbgt5ekhqrcgx4uwls3neim
@@ -55,6 +57,12 @@ importers:
       prettier: 2.7.1
       typescript: 4.8.4
       unbuild: 0.8.11
+
+  packages/add:
+    specifiers:
+      '@m-cli/shared-utils': workspace:*
+    dependencies:
+      '@m-cli/shared-utils': link:../shared-utils
 
   packages/cli-plugin-eslint:
     specifiers:
@@ -116,7 +124,6 @@ importers:
     dependencies:
       '@m-cli/cli-plugin-eslint': link:../cli-plugin-eslint
       '@types/chalk': 2.2.0
-      '@types/semver': 7.3.12
       chalk: 2.4.2
       ejs: 3.1.8
       npmlog: 6.0.2
@@ -124,6 +131,7 @@ importers:
     devDependencies:
       '@types/ejs': 3.1.1
       '@types/npmlog': 4.1.4
+      '@types/semver': 7.3.12
 
 packages:
   /@ampproject/remapping/2.2.0:
@@ -857,17 +865,6 @@ packages:
     dependencies:
       '@types/through': 0.0.30
       rxjs: 7.5.7
-    dev: false
-
-  /@types/inquirer/9.0.2:
-    resolution:
-      {
-        integrity: sha512-MQc3adiIh/rDxLkjnvL03rSvuHg+/dKif4dn/MRsnE+oU1bAdyuDbW0w+ewR1M/M/u/Z0YAbw7NZYCpgQ5SW8A==,
-      }
-    dependencies:
-      '@types/through': 0.0.30
-      rxjs: 7.5.7
-    dev: true
 
   /@types/json-schema/7.0.11:
     resolution:
@@ -897,7 +894,6 @@ packages:
       {
         integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==,
       }
-    dev: false
 
   /@types/node/14.18.31:
     resolution:
@@ -951,7 +947,7 @@ packages:
       {
         integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==,
       }
-    dev: false
+    dev: true
 
   /@types/through/0.0.30:
     resolution:
@@ -960,7 +956,6 @@ packages:
       }
     dependencies:
       '@types/node': 18.8.3
-    dev: false
 
   /@types/validate-npm-package-name/4.0.0:
     resolution:
@@ -1231,7 +1226,6 @@ packages:
     engines: { node: '>=4' }
     dependencies:
       color-convert: 1.9.3
-    dev: true
 
   /ansi-styles/4.3.0:
     resolution:
@@ -1577,7 +1571,6 @@ packages:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
-    dev: true
 
   /chalk/4.1.2:
     resolution:
@@ -1695,7 +1688,6 @@ packages:
       }
     dependencies:
       color-name: 1.1.3
-    dev: true
 
   /color-convert/2.0.1:
     resolution:
@@ -1711,7 +1703,6 @@ packages:
       {
         integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==,
       }
-    dev: true
 
   /color-name/1.1.4:
     resolution:
@@ -3836,7 +3827,6 @@ packages:
         integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==,
       }
     engines: { node: '>=4' }
-    dev: true
 
   /has-flag/4.0.0:
     resolution:
@@ -6060,7 +6050,6 @@ packages:
     engines: { node: '>=4' }
     dependencies:
       has-flag: 3.0.0
-    dev: true
 
   /supports-color/7.2.0:
     resolution:
