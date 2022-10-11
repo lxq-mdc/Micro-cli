@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { program } from 'commander';
 import { chalk, semver } from '@m-cli/shared-utils';
-import create from '@m-cli/create';
+import create from '@m-cli/create/index';
 import minimist from 'minimist';
 import type { OptionsTypes } from '../types';
 
