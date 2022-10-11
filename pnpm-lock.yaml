@@ -56,9 +56,9 @@ importers:
       typescript: 4.8.4
       unbuild: 0.8.11
 
-  packages/add:
+  packages/cli-plugin-eslint:
     specifiers:
-      '@m-cli/shared-utils': workspace:*
+      '@m-cli/shared-utils': workspace:^1.0.0
     dependencies:
       '@m-cli/shared-utils': link:../shared-utils
 
@@ -67,18 +67,62 @@ importers:
       '@m-cli/add': workspace:*
       '@m-cli/create': workspace:*
       '@m-cli/shared-utils': workspace:*
+      '@types/fs-extra': ^9.0.13
+      '@types/minimist': ^1.2.2
+      fs-extra: ^10.1.0
+      minimist: ^1.2.6
     dependencies:
       '@m-cli/add': link:../add
       '@m-cli/create': link:../create
       '@m-cli/shared-utils': link:../shared-utils
+      '@types/fs-extra': 9.0.13
+      '@types/minimist': 1.2.2
+      fs-extra: 10.1.0
+      minimist: 1.2.6
+
+  packages/create:
+    specifiers:
+      '@m-cli/cli-plugin-eslint': workspace:^1.0.0
+      '@m-cli/core': workspace:^1.0.0
+      '@m-cli/shared-utils': workspace:*
+      '@types/fs-extra': ^9.0.13
+      '@types/inquirer': ^9.0.2
+      '@types/validate-npm-package-name': ^4.0.0
+      fs-extra: ^10.1.0
+      inquirer: 8.0.0
+      validate-npm-package-name: ^4.0.0
+    dependencies:
+      '@m-cli/cli-plugin-eslint': link:../cli-plugin-eslint
+      '@m-cli/core': link:../core
+      '@m-cli/shared-utils': link:../shared-utils
+      '@types/fs-extra': 9.0.13
+      '@types/inquirer': 9.0.2
+      '@types/validate-npm-package-name': 4.0.0
+      fs-extra: 10.1.0
+      inquirer: 8.0.0
+      validate-npm-package-name: 4.0.0
 
   packages/shared-utils:
     specifiers:
+      '@m-cli/cli-plugin-eslint': workspace:^1.0.0
+      '@types/chalk': ^2.2.0
+      '@types/ejs': ^3.1.1
       '@types/npmlog': ^4.1.4
+      '@types/semver': ^7.3.12
+      chalk: 2.4.2
+      ejs: ^3.1.8
       npmlog: ^6.0.2
+      semver: ^7.3.8
     dependencies:
+      '@m-cli/cli-plugin-eslint': link:../cli-plugin-eslint
+      '@types/chalk': 2.2.0
+      '@types/semver': 7.3.12
+      chalk: 2.4.2
+      ejs: 3.1.8
       npmlog: 6.0.2
+      semver: 7.3.8
     devDependencies:
+      '@types/ejs': 3.1.1
       '@types/npmlog': 4.1.4
 
 packages:
@@ -766,6 +810,23 @@ packages:
     dev: true
     optional: true
 
+  /@types/chalk/2.2.0:
+    resolution:
+      {
+        integrity: sha512-1zzPV9FDe1I/WHhRkf9SNgqtRJWZqrBWgu7JGveuHmmyR9CnAPCie2N/x+iHrgnpYBIcCJWHBoMRv2TRWktsvw==,
+      }
+    deprecated: This is a stub types definition for chalk (https://github.com/chalk/chalk). chalk provides its own type definitions, so you don't need @types/chalk installed!
+    dependencies:
+      chalk: 5.0.1
+    dev: false
+
+  /@types/ejs/3.1.1:
+    resolution:
+      {
+        integrity: sha512-RQul5wEfY7BjWm0sYY86cmUN/pcXWGyVxWX93DFFJvcrxax5zKlieLwA3T77xJGwNcZW0YW6CYG70p1m8xPFmA==,
+      }
+    dev: true
+
   /@types/estree/0.0.39:
     resolution:
       {
@@ -787,7 +848,16 @@ packages:
       }
     dependencies:
       '@types/node': 18.8.3
-    dev: true
+
+  /@types/inquirer/9.0.2:
+    resolution:
+      {
+        integrity: sha512-MQc3adiIh/rDxLkjnvL03rSvuHg+/dKif4dn/MRsnE+oU1bAdyuDbW0w+ewR1M/M/u/Z0YAbw7NZYCpgQ5SW8A==,
+      }
+    dependencies:
+      '@types/through': 0.0.30
+      rxjs: 7.5.7
+    dev: false
 
   /@types/inquirer/9.0.2:
     resolution:
@@ -820,6 +890,13 @@ packages:
       }
     dependencies:
       '@types/node': 18.8.3
+    dev: false
+
+  /@types/minimist/1.2.2:
+    resolution:
+      {
+        integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==,
+      }
     dev: false
 
   /@types/node/14.18.31:
@@ -869,6 +946,13 @@ packages:
       '@types/node': 18.8.3
     dev: false
 
+  /@types/semver/7.3.12:
+    resolution:
+      {
+        integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==,
+      }
+    dev: false
+
   /@types/through/0.0.30:
     resolution:
       {
@@ -876,7 +960,14 @@ packages:
       }
     dependencies:
       '@types/node': 18.8.3
-    dev: true
+    dev: false
+
+  /@types/validate-npm-package-name/4.0.0:
+    resolution:
+      {
+        integrity: sha512-RpO62vB2lkjEkyLbwTheA2+uwYmtVMWTr/kWRI++UAgVdZqNqdAuIQl/SxBCGeMKfdjWaXPbyhZbiCc4PAj+KA==,
+      }
+    dev: false
 
   /@typescript-eslint/eslint-plugin/5.39.0_hmgqbu7m6n6spoygjbdwd2nnbi:
     resolution:
@@ -1405,6 +1496,15 @@ packages:
       }
     engines: { node: '>=6' }
     dev: true
+
+  /builtins/5.0.1:
+    resolution:
+      {
+        integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==,
+      }
+    dependencies:
+      semver: 7.3.8
+    dev: false
 
   /cacheable-request/2.1.4:
     resolution:
@@ -4627,7 +4727,6 @@ packages:
     engines: { node: '>=10' }
     dependencies:
       yallist: 4.0.0
-    dev: true
 
   /magic-string/0.25.9:
     resolution:
@@ -4753,7 +4852,6 @@ packages:
       {
         integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==,
       }
-    dev: true
 
   /mkdirp/1.0.4:
     resolution:
@@ -5605,7 +5703,6 @@ packages:
       }
     dependencies:
       tslib: 2.4.0
-    dev: true
 
   /safe-buffer/5.1.2:
     resolution:
@@ -5670,7 +5767,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: true
 
   /set-blocking/2.0.0:
     resolution:
@@ -6136,7 +6232,6 @@ packages:
       {
         integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==,
       }
-    dev: true
 
   /tsutils/3.21.0_typescript@4.8.4:
     resolution:
@@ -6345,6 +6440,16 @@ packages:
       }
     dev: true
 
+  /validate-npm-package-name/4.0.0:
+    resolution:
+      {
+        integrity: sha512-mzR0L8ZDktZjpX4OB46KT+56MAhl4EIazWP/+G/HPGuvfdaqg4YsCdtOm6U9+LOFyYDoh4dpnpxZRB9MQQns5Q==,
+      }
+    engines: { node: ^12.13.0 || ^14.15.0 || >=16.0.0 }
+    dependencies:
+      builtins: 5.0.1
+    dev: false
+
   /wcwidth/1.0.1:
     resolution:
       {
@@ -6447,7 +6552,6 @@ packages:
       {
         integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==,
       }
-    dev: true
 
   /yaml/1.10.2:
     resolution:
