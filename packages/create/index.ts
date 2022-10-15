@@ -8,10 +8,10 @@ import type { correctNameResult, errorNameResult } from './types/index';
 import Creator from './Creator';
 
 async function create(projectName: string, options: OptionsTypes) {
-  const cwd = process.cwd();
-  const inCurrent = projectName === '.';
-  const name = inCurrent ? path.relative('../', cwd) : projectName;
-  const targetDir = path.resolve(cwd, projectName || '.');
+  const cwd: string = process.cwd();
+  const inCurrent: boolean = projectName === '.';
+  const name: string = inCurrent ? path.relative('../', cwd) : projectName;
+  const targetDir: string = path.resolve(cwd, projectName || '.');
 
   /**
    * @description 检测项目名称是否合法
@@ -46,7 +46,6 @@ async function create(projectName: string, options: OptionsTypes) {
         return;
       }
     } else {
-      console.log('');
       const { action } = await inquirer.prompt([
         {
           name: 'action',
@@ -72,7 +71,7 @@ async function create(projectName: string, options: OptionsTypes) {
     await fs.mkdir(targetDir);
   }
   const creator = new Creator(name, targetDir);
-  await creator.create();
+  await creator.create(options);
 }
 
 export default create;

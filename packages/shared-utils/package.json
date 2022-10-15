@@ -2,7 +2,7 @@
   "name": "@m-cli/shared-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "./dist/index.mjs",
   "type": "module",
   "keywords": [],
   "author": "",
@@ -10,14 +10,21 @@
   "dependencies": {
     "@m-cli/cli-plugin-eslint": "workspace:^1.0.0",
     "@types/chalk": "^2.2.0",
+    "@types/read-pkg": "^5.1.0",
     "chalk": "2.4.2",
     "ejs": "^3.1.8",
+    "execa": "^6.1.0",
     "npmlog": "^6.0.2",
+    "read-pkg": "^7.1.0",
     "semver": "^7.3.8"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.1",
     "@types/npmlog": "^4.1.4",
     "@types/semver": "^7.3.12"
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
   }
 }

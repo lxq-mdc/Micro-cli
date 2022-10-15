@@ -1,12 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { program } from 'commander';
+import fs from 'node:fs';
 import { chalk, semver } from '@m-cli/shared-utils';
-import create from '@m-cli/create/index';
+import create from '@m-cli/create';
 import minimist from 'minimist';
 import add from '@m-cli/add';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { OptionsTypes } from '../types';
 
-const requiredVersion = require('../package.json').engines.node;
+// const requiredVersion = require('../package.json').engines.node;
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const requiredVersion = JSON.parse(
+  fs.readFileSync(path.resolve(dirname, '../package.json'), 'utf8')
+).engines.node;
 
 function checkNodeVersion(wanted: string, id: string) {
   if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
@@ -26,6 +34,7 @@ program
   .command('create <project-name>')
   .description('create a new project from a React+TS+Vite template')
   .option('-f,--force', 'overwrite target directory if it exists')
+  .option('-n, --no-git', 'Skip git initialization')
   .action((projectName: string, options: OptionsTypes) => {
     if (minimist(process.argv.slice(3))._.length > 1) {
       console.log(
@@ -34,6 +43,8 @@ program
         )
       );
     }
+    console.log('options', options);
+
     create(projectName, options);
   });
 

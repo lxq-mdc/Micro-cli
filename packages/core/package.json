@@ -2,7 +2,7 @@
   "name": "@m-cli/core",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.mjs",
   "type": "module",
   "private": "true",
   "scripts": {
@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@m-cli/add": "workspace:1.0.0",
-    "@m-cli/create": "workspace:*",
+    "@m-cli/create": "workspace:1.0.0",
     "@m-cli/shared-utils": "workspace:*",
     "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",

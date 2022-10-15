@@ -1,7 +1,7 @@
 const getPromptModules = () =>
   [
-    'linter',
     'cssPreprocessors',
+    'linter',
     'typescript',
     'gitHooks',
     // eslint-disable-next-line import/no-dynamic-require, global-require

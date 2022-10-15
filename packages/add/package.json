@@ -2,11 +2,15 @@
   "name": "@m-cli/add",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "./dist/index.mjs",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
   "dependencies": {
     "@m-cli/shared-utils": "workspace:*"
   }

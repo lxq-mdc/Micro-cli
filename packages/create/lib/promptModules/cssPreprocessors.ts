@@ -25,4 +25,10 @@ export default (cli: any) => {
       },
     ],
   });
+  cli.onPromptComplete((answers: any, options: any) => {
+    if (answers.cssPreprocessor) {
+      // eslint-disable-next-line no-param-reassign
+      options.cssPreprocessor = answers.cssPreprocessor;
+    }
+  });
 };
