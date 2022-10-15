@@ -85,8 +85,7 @@ class Creator extends EventTarget {
         dep
       ] = `link:D:/Desktop/m-cli/ts_cli/packages/${dep.slice(7)}`;
     });
-
-    await writeFileTree(this.targetDir, {
+    writeFileTree(this.targetDir, {
       'package.json': JSON.stringify(pkg, null, 2),
     });
 
@@ -97,7 +96,7 @@ class Creator extends EventTarget {
           'shamefully-hoist=true\nstrict-peer-dependencies=false\n'
         : 'shamefully-flatten=true\n';
 
-      await writeFileTree(this.targetDir, {
+      writeFileTree(this.targetDir, {
         '.npmrc': pnpmConfig,
       });
     }

@@ -1,8 +1,6 @@
-import ejs from 'ejs';
-import type { answersTypes, packageTypes, resolvePluginsType } from '../types';
 import GeneratorAPI from './GeneratorAPI';
 import writeFileTree from './writeFileTree';
-// import GeneratorAPI from './GeneratorAPI'
+import type { answersTypes, packageTypes, resolvePluginsType } from '../types';
 
 export default class Generator {
   pkg: Partial<packageTypes>;
@@ -14,9 +12,9 @@ export default class Generator {
   originalPkg: any;
 
   // eslint-disable-next-line no-unused-vars
-  fileMiddlewares: Array<(files: any, render: any) => {}>;
+  fileMiddlewares: ((files: typeof this.files) => Promise<void>)[];
 
-  files: any;
+  files: Record<string, string>;
 
   answers: answersTypes;
 
@@ -51,22 +49,18 @@ export default class Generator {
     await this.initPlugins();
     await this.resolveFiles();
     this.files['package.json'] = `${JSON.stringify(this.pkg, null, 2)}\n`;
-    await writeFileTree(this.targetDir, this.files);
+    writeFileTree(this.targetDir, this.files);
     console.log('写入完毕');
   }
 
   async resolveFiles() {
     const { files } = this;
-    // console.log('files-----------', files)
-    console.log(
-      'this.fileMiddlewares-----------------------',
-      this.fileMiddlewares
-    );
+    console.log('this.fileMiddlewares', this.fileMiddlewares);
 
     // eslint-disable-next-line no-restricted-syntax
     for (const middleware of this.fileMiddlewares) {
       // eslint-disable-next-line no-await-in-loop
-      await middleware(files, ejs.render);
+      await middleware(files);
     }
   }
 }
