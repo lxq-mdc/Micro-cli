@@ -7,6 +7,14 @@ export { default as semver } from 'semver';
 export { isRoot, isTypescript } from './lib/is';
 export { default as projectType } from './lib/projectType';
 export {
+  hasPnpm3OrLater,
+  hasYarn,
+  hasPnpmVersionOrLater,
+  hasGit,
+  hasProjectGit,
+} from './lib/env';
+export { default as resolvePkg } from './lib/pkg';
+export {
   errorLog,
   errorLogWithBg,
   successLog,
@@ -14,3 +22,5 @@ export {
 } from './lib/logWithChalk';
 export { default as ensureDir } from './lib/ensureDir';
 export { default as ensureFile } from './lib/ensureFile';
+export { default as loadModule } from './lib/module';
+export { execa } from 'execa';

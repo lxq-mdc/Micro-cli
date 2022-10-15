@@ -37,4 +37,14 @@ export default (cli: any) => {
       },
     ],
   });
+
+  cli.onPromptComplete((answers: any, options: any) => {
+    if (answers.features.includes('linter')) {
+      // eslint-disable-next-line no-param-reassign
+      options.plugins['@m-cli/cli-plugin-eslint'] = {
+        config: answers.eslintConfig,
+        // lintOn: answers.lintOn
+      };
+    }
+  });
 };

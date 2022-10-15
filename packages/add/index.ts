@@ -1,3 +1,3 @@
-import Add from './lib/add';
+import add from './lib/add';
 
-export default Add;
+export default add;

@@ -8,10 +8,10 @@ import type { correctNameResult, errorNameResult } from './types/index';
 import Creator from './Creator';
 
 async function create(projectName: string, options: OptionsTypes) {
-  const cwd = process.cwd();
-  const inCurrent = projectName === '.';
-  const name = inCurrent ? path.relative('../', cwd) : projectName;
-  const targetDir = path.resolve(cwd, projectName || '.');
+  const cwd: string = process.cwd();
+  const inCurrent: boolean = projectName === '.';
+  const name: string = inCurrent ? path.relative('../', cwd) : projectName;
+  const targetDir: string = path.resolve(cwd, projectName || '.');
 
   /**
    * @description 检测项目名称是否合法
@@ -34,39 +34,36 @@ async function create(projectName: string, options: OptionsTypes) {
   if (fs.existsSync(targetDir)) {
     if (options.force) {
       await fs.remove(targetDir);
+    } else if (inCurrent) {
+      const { ok } = await inquirer.prompt([
+        {
+          name: 'ok',
+          type: 'confirm',
+          message: `Generate project in current directory?`,
+        },
+      ]);
+      if (!ok) {
+        return;
+      }
     } else {
-      if (inCurrent) {
-        const { ok } = await inquirer.prompt([
-          {
-            name: 'ok',
-            type: 'confirm',
-            message: `Generate project in current directory?`,
-          },
-        ]);
-        if (!ok) {
-          return;
-        }
+      const { action } = await inquirer.prompt([
+        {
+          name: 'action',
+          type: 'list',
+          message: `Target directory ${chalk.cyan(
+            targetDir
+          )} already exists. Pick an action:`,
+          choices: [
+            { name: 'Overwrite', value: 'overwrite' },
+            { name: 'Cancel', value: false },
+          ],
+        },
+      ]);
+      if (action === 'overwrite') {
+        console.log(`\nRemoving ${chalk.cyan(targetDir)}...`);
+        await fs.remove(targetDir);
       } else {
-        console.log('');
-        const { action } = await inquirer.prompt([
-          {
-            name: 'action',
-            type: 'list',
-            message: `Target directory ${chalk.cyan(
-              targetDir
-            )} already exists. Pick an action:`,
-            choices: [
-              { name: 'Overwrite', value: 'overwrite' },
-              { name: 'Cancel', value: false },
-            ],
-          },
-        ]);
-        if (action === 'overwrite') {
-          console.log(`\nRemoving ${chalk.cyan(targetDir)}...`);
-          await fs.remove(targetDir);
-        } else {
-          return;
-        }
+        return;
       }
     }
   }
@@ -74,7 +71,7 @@ async function create(projectName: string, options: OptionsTypes) {
     await fs.mkdir(targetDir);
   }
   const creator = new Creator(name, targetDir);
-  await creator.create();
+  await creator.create(options);
 }
 
 export default create;

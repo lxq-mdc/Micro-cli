@@ -1,0 +1,16 @@
+{
+  "name": "@m-cli/cli-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.mjs",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@m-cli/create": "workspace:^1.0.0"
+  }
+}

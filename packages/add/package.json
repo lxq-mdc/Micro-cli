@@ -11,6 +11,10 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
   "dependencies": {
     "@m-cli/shared-utils": "workspace:*"
   }

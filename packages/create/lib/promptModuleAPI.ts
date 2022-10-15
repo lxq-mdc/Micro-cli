@@ -15,4 +15,8 @@ export default class PromptModuleAPI {
   injectPrompt(prompt: PromptType) {
     this.creator.injectedPrompts.push(prompt);
   }
+
+  onPromptComplete(cb: any) {
+    this.creator.promptCompleteCbs.push(cb);
+  }
 }
