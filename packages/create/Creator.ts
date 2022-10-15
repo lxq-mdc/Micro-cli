@@ -136,7 +136,7 @@ class Creator extends EventTarget {
     // eslint-disable-next-line no-empty, no-restricted-syntax
     for (const id of Object.keys(rawPlugins)) {
       // eslint-disable-next-line no-await-in-loop
-      const apply = loadModule(`${id}`, this.targetDir) || (() => {});
+      const apply = (await loadModule(`${id}`, this.targetDir)) || (() => {});
       const options = { ...(rawPlugins as any)[id], projectName: this.name };
       plugins.push({ id, apply, options, answers: this.answers });
     }

@@ -40,15 +40,11 @@ export default class Generator {
   }
 
   async initPlugins() {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const plugin of this.plugins) {
+    this.plugins.forEach((plugin) => {
       const { id, apply, options, answers } = plugin;
       const api = new GeneratorAPI(id, this, options, this.answers);
-      // eslint-disable-next-line no-await-in-loop
-      const a = await apply;
-      // eslint-disable-next-line no-await-in-loop
-      await a(api, options, answers);
-    }
+      apply(api, options, answers);
+    });
   }
 
   async generate() {
