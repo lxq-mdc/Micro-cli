@@ -53,9 +53,10 @@ export interface presetTypes {
   plugins: Partial<presetPluginsTypes>;
 }
 
-// eslint-disable-next-line no-unused-vars
 export type onPromptCompleteCbsType = (
+  // eslint-disable-next-line no-unused-vars
   answers: answersTypes,
+  // eslint-disable-next-line no-unused-vars
   options: any
 ) => void;
 

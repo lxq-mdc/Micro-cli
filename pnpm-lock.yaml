@@ -82,6 +82,12 @@ importers:
     dependencies:
       '@m-cli/create': link:../create
 
+  packages/cli-service:
+    specifiers:
+      '@m-cli/create': workspace:^1.0.0
+    dependencies:
+      '@m-cli/create': link:../create
+
   packages/core:
     specifiers:
       '@m-cli/add': workspace:1.0.0
