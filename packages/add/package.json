@@ -2,8 +2,12 @@
   "name": "@m-cli/add",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "./dist/index.mjs",
   "type": "module",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

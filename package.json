@@ -8,7 +8,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:core": "pnpm --filter \"@m-cli/core\" run dev"
+    "dev:core": "pnpm --filter \"@m-cli/core\" run dev",
+    "build": "pnpm -F \"@m-cli/*\" run build"
   },
   "keywords": [],
   "author": "",

@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

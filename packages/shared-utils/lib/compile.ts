@@ -2,6 +2,9 @@ import ejs from 'ejs';
 import fs from 'node:fs';
 import path from 'node:path';
 
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = path.resolve();
+
 const compile = (templateName: string, data: any) => {
   // const templatePosition = `@m-cli/cli-plugin-eslint/generator/templates/react/${templateName}`
   const templatePosition = path.resolve(
