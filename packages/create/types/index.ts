@@ -22,9 +22,12 @@ export type featureType = Omit<
 >;
 export interface answersTypes {
   preset: 'React' | 'Vue';
-  features?: Array<'css-preprocessor' | 'linter' | 'TypeScript' | 'gitHooks'>;
-  cssPreprocessor?: 'less' | 'dart-sass' | 'stylus';
+  features?: Array<
+    'css-preprocessor' | 'linter' | 'TypeScript' | 'gitHooks' | 'router'
+  >;
+  cssPreprocessor?: 'less' | 'sass' | 'stylus';
   eslintConfig?: 'airbnb' | 'base' | 'standard' | 'prettier';
+  historyMode?: boolean;
 }
 
 export interface presetPluginsTypes {
@@ -32,6 +35,7 @@ export interface presetPluginsTypes {
     config: 'airbnb' | 'standard';
     lintOn: Array<'save' | 'commit'>;
   };
+  '@m-cli/cli-plugin-router': any;
   '@m-cli/cli-service': any;
   '@m-cli/cli-plugin-cssPreprocessors': any;
   '@m-cli/cli-plugin-typescript': any;

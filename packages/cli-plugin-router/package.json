@@ -2,7 +2,7 @@
   "name": "@m-cli/cli-plugin-router",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/index.mjs",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@m-cli/create": "workspace:^1.0.0"
+    "@m-cli/create": "workspace:^1.0.0",
+    "@m-cli/shared-utils": "workspace:*"
   }
 }

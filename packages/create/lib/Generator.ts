@@ -1,3 +1,4 @@
+import { injectImportsToFile } from '@m-cli/shared-utils';
 import GeneratorAPI from './GeneratorAPI';
 import writeFileTree from './writeFileTree';
 import type { answersTypes, packageTypes, resolvePluginsType } from '../types';
@@ -10,6 +11,11 @@ export default class Generator {
   targetDir: string;
 
   originalPkg: any;
+
+  imports: Record<string, Parameters<typeof injectImportsToFile>['1']> = {};
+
+  // eslint-disable-next-line no-unused-vars
+  modifyCodeSnippetCbs: Record<string, ((code: string) => string)[]> = {};
 
   // eslint-disable-next-line no-unused-vars
   fileMiddlewares: ((files: typeof this.files) => Promise<void>)[];
@@ -62,5 +68,20 @@ export default class Generator {
       // eslint-disable-next-line no-await-in-loop
       await middleware(files);
     }
+
+    /** @description 向文件注入import */
+    Object.keys(files).forEach((file) => {
+      const imports = this.imports[file];
+      if (imports && Object.keys(imports).length > 0) {
+        files[file] = injectImportsToFile(files[file], imports) || files[file];
+      }
+    });
+
+    /** @description 修改文件代码 */
+    Object.keys(this.modifyCodeSnippetCbs).forEach((file) => {
+      this.modifyCodeSnippetCbs[file].forEach((cb) => {
+        files[file] = cb(files[file]);
+      });
+    });
   }
 }

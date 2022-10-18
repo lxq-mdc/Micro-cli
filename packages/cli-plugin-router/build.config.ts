@@ -2,7 +2,7 @@
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: ['./index'],
+  entries: ['./generator/index'],
   // Generates .d.ts declaration file
   declaration: true,
 });

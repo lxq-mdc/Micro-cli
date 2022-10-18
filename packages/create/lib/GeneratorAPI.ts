@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import ejs from 'ejs';
 import { globby } from 'globby';
+import { injectImportsToFile } from '@m-cli/shared-utils';
 import Generator from './Generator';
 import { answersTypes, packageTypes } from '../types';
 
@@ -28,6 +29,8 @@ export default class GeneratorAPI {
 
   answers: answersTypes;
 
+  readonly entryFile: string;
+
   constructor(
     id: string,
     generator: Generator,
@@ -39,6 +42,7 @@ export default class GeneratorAPI {
     this.options = options;
 
     this.answers = answers;
+    this.entryFile = this.getEntryFile();
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -71,5 +75,42 @@ export default class GeneratorAPI {
         ...(fields as any)[key],
       };
     }
+  }
+
+  /**
+   * @description 向文件中加入 import 语句
+   */
+  injectImports(
+    file: string,
+    imports: Parameters<typeof injectImportsToFile>['1']
+  ) {
+    this.generator.imports[file] = imports;
+  }
+
+  /**
+   * @description 修改文件代码
+   */
+  // eslint-disable-next-line no-unused-vars
+  injectModifyCodeSnippetCb(file: string, cb: (code: string) => string) {
+    if (!this.generator.modifyCodeSnippetCbs[file])
+      this.generator.modifyCodeSnippetCbs[file] = [];
+    this.generator.modifyCodeSnippetCbs[file].push(cb);
+  }
+
+  /**
+   * @description 获得入口文件名
+   */
+  private getEntryFile() {
+    const files = {
+      React: ['main.jsx', 'main.tsx'],
+      Vue: ['main.js', 'main.ts'],
+    };
+
+    const hasTypeScript = Number(
+      this.answers.features?.includes('TypeScript') || 0
+    );
+    const framework = this.answers.preset;
+
+    return files[framework][hasTypeScript];
   }
 }
