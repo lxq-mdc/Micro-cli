@@ -4,6 +4,7 @@ export default (cli: any) => {
     value: 'css-preprocessor',
     description: 'Add support for CSS pre-processors like Sass, Less',
   });
+
   cli.injectPrompt({
     name: 'cssPreprocessor',
     when: (answers: { features: string | string[] }) =>
@@ -13,7 +14,7 @@ export default (cli: any) => {
     choices: [
       {
         name: 'Sass/SCSS (with dart-sass)',
-        value: 'dart-sass',
+        value: 'sass',
       },
       {
         name: 'Less',
@@ -25,10 +26,11 @@ export default (cli: any) => {
       },
     ],
   });
+
   cli.onPromptComplete((answers: any, options: any) => {
     if (answers.cssPreprocessor) {
       // eslint-disable-next-line no-param-reassign
-      options.cssPreprocessor = answers.cssPreprocessor;
+      options.plugins['@m-cli/cli-plugin-css-preprocessor'] = {};
     }
   });
 };
