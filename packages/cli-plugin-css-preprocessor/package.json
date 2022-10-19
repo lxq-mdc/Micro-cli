@@ -1,5 +1,5 @@
 {
-  "name": "@m-cli/cli-plugin-router",
+  "name": "@m-cli/cli-plugin-css-preprocessor",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.mjs",

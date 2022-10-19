@@ -4,6 +4,10 @@
   "description": "",
   "main": "./dist/index.mjs",
   "type": "module",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -23,9 +27,5 @@
     "globby": "^13.1.2",
     "inquirer": "8.0.0",
     "validate-npm-package-name": "^4.0.0"
-  },
-  "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild"
   }
 }

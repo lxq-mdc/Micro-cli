@@ -1,8 +1,7 @@
-import ejs from 'ejs';
-import type { answersTypes, packageTypes, resolvePluginsType } from '../types';
+import { injectImportsToFile } from '@m-cli/shared-utils';
 import GeneratorAPI from './GeneratorAPI';
 import writeFileTree from './writeFileTree';
-// import GeneratorAPI from './GeneratorAPI'
+import type { answersTypes, packageTypes, resolvePluginsType } from '../types';
 
 export default class Generator {
   pkg: Partial<packageTypes>;
@@ -13,10 +12,15 @@ export default class Generator {
 
   originalPkg: any;
 
-  // eslint-disable-next-line no-unused-vars
-  fileMiddlewares: Array<(files: any, render: any) => {}>;
+  imports: Record<string, Parameters<typeof injectImportsToFile>['1']> = {};
 
-  files: any;
+  // eslint-disable-next-line no-unused-vars
+  modifyCodeSnippetCbs: Record<string, ((code: string) => string)[]> = {};
+
+  // eslint-disable-next-line no-unused-vars
+  fileMiddlewares: ((files: typeof this.files) => Promise<void>)[];
+
+  files: Record<string, string>;
 
   answers: answersTypes;
 
@@ -40,37 +44,44 @@ export default class Generator {
   }
 
   async initPlugins() {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const plugin of this.plugins) {
+    this.plugins.forEach((plugin) => {
       const { id, apply, options, answers } = plugin;
       const api = new GeneratorAPI(id, this, options, this.answers);
-      // eslint-disable-next-line no-await-in-loop
-      const a = await apply;
-      // eslint-disable-next-line no-await-in-loop
-      await a(api, options, answers);
-    }
+      apply(api, options, answers);
+    });
   }
 
   async generate() {
     await this.initPlugins();
     await this.resolveFiles();
     this.files['package.json'] = `${JSON.stringify(this.pkg, null, 2)}\n`;
-    await writeFileTree(this.targetDir, this.files);
+    writeFileTree(this.targetDir, this.files);
     console.log('写入完毕');
   }
 
   async resolveFiles() {
     const { files } = this;
-    // console.log('files-----------', files)
-    console.log(
-      'this.fileMiddlewares-----------------------',
-      this.fileMiddlewares
-    );
+    console.log('this.fileMiddlewares', this.fileMiddlewares);
 
     // eslint-disable-next-line no-restricted-syntax
     for (const middleware of this.fileMiddlewares) {
       // eslint-disable-next-line no-await-in-loop
-      await middleware(files, ejs.render);
+      await middleware(files);
     }
+
+    /** @description 向文件注入import */
+    Object.keys(files).forEach((file) => {
+      const imports = this.imports[file];
+      if (imports && Object.keys(imports).length > 0) {
+        files[file] = injectImportsToFile(files[file], imports) || files[file];
+      }
+    });
+
+    /** @description 修改文件代码 */
+    Object.keys(this.modifyCodeSnippetCbs).forEach((file) => {
+      this.modifyCodeSnippetCbs[file].forEach((cb) => {
+        files[file] = cb(files[file]);
+      });
+    });
   }
 }

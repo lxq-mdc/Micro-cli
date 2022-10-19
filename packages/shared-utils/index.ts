@@ -1,9 +1,6 @@
-import { execa } from 'execa';
-
 export { default as exit } from './lib/exit';
 export { compile, writeToFile } from './lib/compile';
 export { default as extendPackage } from './lib/extendPackage';
-// export { exit, compile, writeToFile, extendPackage };
 export { default as chalk } from 'chalk';
 export { default as semver } from 'semver';
 export { isRoot, isTypescript } from './lib/is';
@@ -25,6 +22,9 @@ export {
 export { default as ensureDir } from './lib/ensureDir';
 export { default as ensureFile } from './lib/ensureFile';
 export { default as loadModule } from './lib/module';
-// export {default as execa} from 'execa'
-export { execa };
-// export { default as renderFile } from './lib/renderFile';
+export { execa } from 'execa';
+export { default as injectImportsToFile } from './lib/injectImportsToFile';
+export type { DeleteUndefinedInUnion } from './lib/typescriptUtils';
+export { default as replaceNodeInJSX } from './lib/replaceNodeInJSX';
+export { default as replaceNodeInVue } from './lib/replaceNodeInVue';
+export { default as injectRootOptionInVue } from './lib/injectRootOptionInVue';

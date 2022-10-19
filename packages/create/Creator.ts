@@ -88,8 +88,7 @@ class Creator extends EventTarget {
         dep
       ] = `link:D:/Desktop/m-cli/ts_cli/packages/${dep.slice(7)}`;
     });
-
-    await writeFileTree(this.targetDir, {
+    writeFileTree(this.targetDir, {
       'package.json': JSON.stringify(pkg, null, 2),
     });
 
@@ -100,7 +99,7 @@ class Creator extends EventTarget {
           'shamefully-hoist=true\nstrict-peer-dependencies=false\n'
         : 'shamefully-flatten=true\n';
 
-      await writeFileTree(this.targetDir, {
+      writeFileTree(this.targetDir, {
         '.npmrc': pnpmConfig,
       });
     }
@@ -151,7 +150,7 @@ class Creator extends EventTarget {
     // eslint-disable-next-line no-empty, no-restricted-syntax
     for (const id of Object.keys(rawPlugins)) {
       // eslint-disable-next-line no-await-in-loop
-      const apply = loadModule(`${id}`, this.targetDir) || (() => {});
+      const apply = (await loadModule(`${id}`, this.targetDir)) || (() => {});
       const options = { ...(rawPlugins as any)[id], projectName: this.name };
       plugins.push({ id, apply, options, answers: this.answers });
     }
