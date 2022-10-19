@@ -13,74 +13,112 @@ interface Options {
   [K: string]: Option & { identifierName?: string };
 }
 
+interface NewOption {
+  kind: 'named' | 'default';
+  key: string;
+}
+
 export default (
   { types, template }: typeof BabelCore,
   outerOptions: OuterOptions
 ): PluginObj => {
   const options: Options = outerOptions;
+  const importDefaultSpecifierMap = new Map();
+  const importSpecifierMap = new Map();
+  const importRenamedSpecifierMap = new Map();
+  const unImportedOptions: {
+    [K: string]: NewOption[];
+  } = {};
+
   return {
     visitor: {
       Program(path) {
         path.traverse({
-          ImportDeclaration(importPath) {
-            const requirePath = importPath.node.source.value;
-            Object.keys(options).forEach((key) => {
-              const option = options[key];
-              if (option.require === requirePath) {
-                // 包名相同
-                const specifiers = importPath.get('specifiers');
-                specifiers.forEach((specifier) => {
-                  // 如果是默认type导入
-                  if (option.kind === 'default') {
-                    // 判断导入类型
-                    if (types.isImportDefaultSpecifier(specifier)) {
-                      // 找到已有 default 类型的引入
-                      if (specifier.node.local.name === key) {
-                        // 挂到 identifierName 以供后续调用获取
-                        option.identifierName = specifier
-                          .get('local')
-                          .toString();
-                      }
-                    }
-                  }
+          ImportDeclaration: {
+            enter: (importPath) => {
+              importPath.get('specifiers').forEach((specifier) => {
+                if (types.isImportDefaultSpecifier(specifier)) {
+                  importDefaultSpecifierMap.set(
+                    specifier.node.local.name,
+                    importPath.node.source.value
+                  );
+                } else if (
+                  specifier.node.local.name !==
+                  (
+                    (specifier.node as BabelCore.types.ImportSpecifier)
+                      .imported as BabelCore.types.Identifier
+                  ).name
+                ) {
+                  importRenamedSpecifierMap.set(specifier.node.local.name, {
+                    imported: specifier.node.local.name,
+                    require: importPath.node.source.value,
+                  }); // 如果是import React, { useState as a } from 'react'，就把useState和a全部放进去
+                } else {
+                  importSpecifierMap.set(
+                    specifier.node.local.name,
+                    importPath.node.source.value
+                  );
+                }
+              });
+            },
+          },
+        });
 
-                  // 如果是 named 形式的导入
-                  if (option.kind === 'named') {
-                    //
-                    if (types.isImportSpecifier(specifier)) {
-                      // 找到已有 default 类型的引入
-                      if (specifier.node.local.name === key) {
-                        option.identifierName = specifier.local.toString();
-                      }
-                    }
-                  }
-                });
+        Object.keys(options).forEach((key) => {
+          if (importDefaultSpecifierMap.has(key)) {
+            if (
+              options[key].require !== importDefaultSpecifierMap.get(key) ||
+              options[key].kind !== 'default'
+            )
+              // 名字相同，但是包不同或者不是默认导入
+              throw new Error('default error');
+          } else if (importSpecifierMap.has(key)) {
+            if (
+              options[key].require !== importSpecifierMap.get(key) ||
+              options[key].kind !== 'named'
+            )
+              // 名字相同，但是包不同或者不是按需导入
+              throw new Error('named error');
+          } else if (importRenamedSpecifierMap.has(key)) {
+            throw new Error('renamed error');
+          } else {
+            if (!unImportedOptions[options[key].require])
+              unImportedOptions[options[key].require] = [];
+            unImportedOptions[options[key].require].push({
+              key,
+              kind: options[key].kind,
+            });
+          }
+        });
+
+        path.traverse({
+          ImportDeclaration: (importPath) => {
+            console.log('--------------', importPath.toString());
+            console.log(unImportedOptions);
+            Object.keys(unImportedOptions).forEach((requireSource, index) => {
+              if (importPath.node.source.value === requireSource) {
+                console.log(index, requireSource);
+                // eslint-disable-next-line no-use-before-define
+                addImportInOldStatement(
+                  importPath,
+                  requireSource,
+                  unImportedOptions[requireSource]
+                );
+                unImportedOptions[requireSource] = [];
+                importPath.skip(); // 跳过遍历新生成的节点
               }
             });
           },
         });
 
-        // 处理未被引入的包
-        Object.keys(options).forEach((key) => {
-          const option = options[key];
-          // 需要require 并且未找到 identifierName 字段
-          if (option.require && !option.identifierName) {
-            // default形式
-            if (option.kind === 'default') {
-              // eslint-disable-next-line no-use-before-define
-              insertImportStatement(path, key, option);
-            }
-
-            // named形式
-            if (option.kind === 'named') {
-              // eslint-disable-next-line no-use-before-define
-              insertImportStatement(path, key, option);
-            }
-          }
-
-          // 如果没有传递 require 会认为是全局方法，不做导入处理
-          if (!option.require) {
-            option.identifierName = key;
+        Object.keys(unImportedOptions).forEach((requireSource) => {
+          if (unImportedOptions[requireSource].length > 0) {
+            // eslint-disable-next-line no-use-before-define
+            insertImportStatement(
+              path,
+              requireSource,
+              unImportedOptions[requireSource]
+            );
           }
         });
       },
@@ -89,29 +127,59 @@ export default (
 
   function insertImportStatement(
     path: BabelCore.NodePath<BabelCore.types.Program>,
-    key: string,
-    option: Option
+    requireSource: string,
+    arr: NewOption[]
   ) {
+    const namedImport: string[] = [];
+    let defaultImport = '';
+    arr.forEach((option) => {
+      if (option.kind === 'named') {
+        namedImport.push(option.key);
+      } else {
+        defaultImport = option.key;
+      }
+    });
+    console.log(
+      `import ${`${defaultImport} `} ${
+        namedImport.length > 0 ? `{${namedImport.join(',')}}` : ''
+      } from '${requireSource}'`
+    );
+    const newNode = template.statement(
+      `import ${`${defaultImport} `} ${
+        namedImport.length > 0 ? `{${namedImport.join(',')}}` : ''
+      } from '${requireSource}'`
+    )();
+
     const nodeIndex = path.node.body.findIndex((node) => {
       if (node.type !== 'ImportDeclaration') {
         return true;
       }
       return false;
     });
-
-    let newNode;
-    if (option.kind === 'default') {
-      newNode = template.statement(`import ${key} from '${option.require}'`)();
-    } else {
-      newNode = template.statement(
-        `import {${key}} from '${option.require}'`
-      )();
-    }
-
+    console.log(path.get(`body.${nodeIndex}`));
     (
-      path.get(
-        `body.${nodeIndex}`
-      ) as BabelCore.NodePath<BabelCore.types.Statement>
+      path.get(`body.${nodeIndex}`) as BabelCore.NodePath<BabelCore.types.Node>
     ).insertBefore(newNode);
+  }
+
+  function addImportInOldStatement(
+    importPath: BabelCore.NodePath<BabelCore.types.ImportDeclaration>,
+    requireSource: string,
+    arr: NewOption[]
+  ) {
+    let statement = importPath.toString();
+    console.log(requireSource, arr);
+    arr.forEach((option) => {
+      if (option.kind === 'named') {
+        statement = `${statement.split('}')[0]}, ${
+          option.key
+        } } from '${requireSource}'`;
+        console.log(statement);
+      } else {
+        statement = `import ${option.key},{${statement.split('{')}`;
+      }
+    });
+
+    importPath.replaceWith(template.statement(statement)());
   }
 };
