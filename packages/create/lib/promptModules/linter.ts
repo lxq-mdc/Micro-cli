@@ -30,11 +30,6 @@ export default (cli: any) => {
         value: 'standard',
         short: 'Standard',
       },
-      {
-        name: 'ESLint + Prettier',
-        value: 'prettier',
-        short: 'Prettier',
-      },
     ],
   });
 

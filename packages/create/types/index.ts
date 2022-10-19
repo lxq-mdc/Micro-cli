@@ -66,9 +66,10 @@ export interface packageTypes {
   version: string;
   type: string;
   scripts: {
-    dev: string;
-    build: string;
-    preview: string;
+    dev?: string;
+    build?: string;
+    preview?: string;
+    [prop: string]: any;
   };
   dependencies: {
     [prop: string]: string;
@@ -76,4 +77,9 @@ export interface packageTypes {
   devDependencies: {
     [prop: string]: string;
   };
+  husky: any;
+  config: any;
+  'lint-staged': any;
+  // [prop: any]: string;
+  // prop: any: string;
 }

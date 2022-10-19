@@ -1,0 +1,16 @@
+{
+  "name": "@m-cli/cli-plugin-gitHooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@m-cli/create": "workspace:^1.0.0"
+  }
+}

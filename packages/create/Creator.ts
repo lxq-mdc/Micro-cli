@@ -8,6 +8,7 @@ import {
   hasProjectGit,
   execa,
   loadModule,
+  chalk,
 } from '@m-cli/shared-utils';
 import type { OptionsTypes } from '@m-cli/core/types';
 import PromptModuleAPI from './lib/promptModuleAPI';
@@ -54,7 +55,7 @@ class Creator extends EventTarget {
     this.answers = { preset: 'React' };
 
     const promptAPI = new PromptModuleAPI(this);
-    getPromptModules().forEach((m) => m(promptAPI));
+    getPromptModules().forEach((m: any) => m(promptAPI));
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -70,6 +71,8 @@ class Creator extends EventTarget {
       : hasYarn()
       ? 'yarn'
       : 'npm';
+
+    console.log(`✨  Creating project in ${chalk.yellow(this.targetDir)}.`);
     // eslint-disable-next-line no-unused-vars
     const pkg = {
       name: this.name,
@@ -105,9 +108,18 @@ class Creator extends EventTarget {
     // so that vue-cli-service can setup git hooks.
     const shouldInitGit = this.shouldInitGit(cliOptions);
     if (shouldInitGit) {
+      console.log(`🗃  Initializing git repository...`);
       await execa('git init', { cwd: this.targetDir });
-      await execa(`${packageManager} install`, { cwd: this.targetDir });
     }
+
+    // install plugins
+    console.log(
+      `⚙\u{fe0f}  Installing CLI plugins. This might take a while...`
+    );
+    console.log();
+    await execa(`${packageManager} install`, { cwd: this.targetDir });
+
+    console.log(`🚀  Invoking generators...`);
     // 5.遍历插件，generator方法设置为插件的apply方法
     const plugins: Array<resolvePluginsType> = await this.resolvePlugins(
       preset.plugins
@@ -122,6 +134,9 @@ class Creator extends EventTarget {
 
     // 调用generator的generate方法
     await generator.generate();
+
+    console.log(`📦  Installing additional dependencies...`);
+    await execa(`${packageManager} install`, { cwd: this.targetDir });
   }
 
   // { id: options } => [{ id, apply, options }]

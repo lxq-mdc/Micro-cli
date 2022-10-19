@@ -1,29 +1,19 @@
-// import { compile, extendPackage, writeToFile } from '@m-cli/shared-utils';
-// import path from 'node:path';
+import fs from 'node:fs';
+import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
+import { answersTypes } from '@m-cli/create/types';
+import path from 'node:path';
+import { getDeps } from './eslintDeps';
+import config from './eslintOptions';
 
-// export default async (targetDir: string, pkg: any) => {
-//   const result = await compile('react-eslint.ejs', {});
-//   const obj = {
-//     devDependencies: {
-//       eslint: '^8.0.1',
-//       '@typescript-eslint/eslint-plugin': '^5.0.0',
-//       '@typescript-eslint/parser': '^5.33.1',
-//       'eslint-config-prettier': '^8.5.0',
-//       'eslint-config-standard-with-typescript': '^22.0.0',
-//       'eslint-plugin-babel': '^5.3.1',
-//       'eslint-plugin-import': '^2.25.2',
-//       'eslint-plugin-n': '^15.0.0',
-//       'eslint-plugin-prettier': '^4.2.1',
-//       'eslint-plugin-promise': '^6.0.0',
-//       'eslint-plugin-react': '^7.30.1',
-//       'eslint-plugin-react-hooks': '^4.6.0',
-//     },
-//   };
-//   // eslint-disable-next-line no-param-reassign
-//   pkg = extendPackage(JSON.stringify(pkg), obj);
-//   console.log('pkg', pkg);
-//   const targetPath = path.resolve(targetDir, '.eslintrc');
-//   await writeToFile(targetPath, result);
-// };
-
-export default { a: 1 };
+export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
+  const devDependencies = getDeps(answers);
+  const eslintConfigFinal = config(answers);
+  fs.writeFileSync(
+    path.resolve(__dirname, './template/.eslintrc'),
+    JSON.stringify(eslintConfigFinal, null, 2)
+  );
+  api.render('./template', { plugin: 'cli-plugin-eslint' });
+  api.extendPackage({
+    ...devDependencies,
+  });
+};
