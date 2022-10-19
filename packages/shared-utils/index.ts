@@ -28,3 +28,4 @@ export type { DeleteUndefinedInUnion } from './lib/typescriptUtils';
 export { default as replaceNodeInJSX } from './lib/replaceNodeInJSX';
 export { default as replaceNodeInVue } from './lib/replaceNodeInVue';
 export { default as injectRootOptionInVue } from './lib/injectRootOptionInVue';
+export { default as getCssPreProcessor } from './lib/getCssPreProcessor';
