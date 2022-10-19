@@ -19,7 +19,7 @@ const addRouter = {
 
     api.injectImports(`src/App.${extension}`, {
       routes: {
-        require: 'router',
+        require: './router',
         kind: 'default',
       },
       [routerNode]: {
@@ -52,6 +52,10 @@ const addRouter = {
           ],
         }) || code
     );
+
+    api.render(`./template/template-react${isTypescript ? '-ts' : ''}`, {
+      plugin: 'cli-plugin-router',
+    });
   },
   Vue: (api: GeneratorAPI, historyMode: boolean, isTypescript: boolean) => {
     const extension = isTypescript ? 'ts' : 'js';
