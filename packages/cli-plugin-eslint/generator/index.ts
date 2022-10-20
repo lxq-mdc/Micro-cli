@@ -14,6 +14,8 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   );
   api.render('./template', { plugin: 'cli-plugin-eslint' });
   api.extendPackage({
-    ...devDependencies,
+    devDependencies: {
+      ...devDependencies,
+    },
   });
 };

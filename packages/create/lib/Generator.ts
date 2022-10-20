@@ -10,7 +10,7 @@ export default class Generator {
 
   targetDir: string;
 
-  originalPkg: any;
+  originalPkg: Partial<packageTypes>;
 
   imports: Record<string, Parameters<typeof injectImportsToFile>['1']> = {};
 
@@ -56,12 +56,10 @@ export default class Generator {
     await this.resolveFiles();
     this.files['package.json'] = `${JSON.stringify(this.pkg, null, 2)}\n`;
     writeFileTree(this.targetDir, this.files);
-    console.log('写入完毕');
   }
 
   async resolveFiles() {
     const { files } = this;
-    console.log('this.fileMiddlewares', this.fileMiddlewares);
 
     // eslint-disable-next-line no-restricted-syntax
     for (const middleware of this.fileMiddlewares) {

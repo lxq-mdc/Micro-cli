@@ -6,13 +6,13 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   if (answers.preset === 'React') {
     if (hasTypeScript) {
       api.render('./template/template-react-ts', { plugin: 'cli-service' });
-      // api.extendPackage({
-      //     "devDependencies": {
-      //         "typescript": "^4.6.4"
-      //     }
-      // })
     } else {
-      api.render('./template/template-react', { plugin: 'cli-service' });
+      api.render('./template/template-react', {
+        plugin: 'cli-service',
+        data: {
+          name: 'micro_cli',
+        },
+      });
     }
 
     api.extendPackage({
@@ -35,12 +35,6 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   } else if (answers.preset === 'Vue') {
     if (hasTypeScript) {
       api.render('./template/template-vue-ts', { plugin: 'cli-service' });
-      // api.extendPackage({
-      //     "devDependencies": {
-      //         "typescript": "^4.6.4",
-      //         "vue-tsc": "^0.40.4"
-      //     }
-      // })
     } else {
       api.render('./template/template-vue', { plugin: 'cli-service' });
     }

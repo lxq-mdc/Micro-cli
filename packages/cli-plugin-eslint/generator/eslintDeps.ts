@@ -76,6 +76,7 @@ const getDeps = (answers: answersTypes) => {
   if (answers.features?.includes('TypeScript')) {
     Object.assign(deps, DEPS_MAP.TypeScript.common);
   }
+
   return deps;
 };
 export { DEPS_MAP, getDeps };

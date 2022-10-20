@@ -29,7 +29,6 @@ const ensureDir = async (
     return true;
   } catch (err) {
     errorLogWithBg('something error!!!');
-    console.log(err);
     return false;
   }
 };

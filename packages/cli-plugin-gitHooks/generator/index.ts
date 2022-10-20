@@ -1,8 +1,6 @@
 import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
-import { answersTypes } from '@m-cli/create/types';
 
-export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
-  console.log(api, options, answers);
+export default (api: GeneratorAPI) => {
   api.extendPackage({
     scripts: {
       prepare: 'husky install',

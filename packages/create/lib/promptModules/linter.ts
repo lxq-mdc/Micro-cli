@@ -1,4 +1,7 @@
-export default (cli: any) => {
+import type { answersTypes } from '../../types';
+import type PromptModuleAPI from '../promptModuleAPI';
+
+export default (cli: PromptModuleAPI) => {
   cli.injectFeature({
     name: 'Linter / Formatter',
     value: 'linter',
@@ -8,13 +11,12 @@ export default (cli: any) => {
   });
   cli.injectPrompt({
     name: 'eslintConfig',
-    when: (answers: { features: string | string[] }) =>
-      answers.features.includes('linter'),
+    when: (answers: answersTypes) => answers.features?.includes('linter')!,
     type: 'list',
     message: 'Pick a linter / formatter config:',
     description:
       'Checking code errors and enforcing an homogeoneous code style is recommended.',
-    choices: () => [
+    choices: [
       {
         name: 'ESLint with error prevention only',
         value: 'base',
@@ -33,12 +35,11 @@ export default (cli: any) => {
     ],
   });
 
-  cli.onPromptComplete((answers: any, options: any) => {
-    if (answers.features.includes('linter')) {
+  cli.onPromptComplete((answers: answersTypes, options: any) => {
+    if (answers.features?.includes('linter')) {
       // eslint-disable-next-line no-param-reassign
       options.plugins['@m-cli/cli-plugin-eslint'] = {
         config: answers.eslintConfig,
-        // lintOn: answers.lintOn
       };
     }
   });

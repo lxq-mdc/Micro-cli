@@ -1,6 +1,7 @@
-import { answersTypes } from '../../types';
+import type { answersTypes } from '../../types';
+import type PromptModuleAPI from '../promptModuleAPI';
 
-export default (cli: any) => {
+export default (cli: PromptModuleAPI) => {
   cli.injectFeature({
     name: 'gitHooks',
     value: 'gitHooks',

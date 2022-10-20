@@ -4,7 +4,9 @@ export default function sortObject(
   keyOrder: string[],
   dontSortByUnicode: boolean
 ) {
-  const res: any = {};
+  const res: {
+    [index: string]: string;
+  } = {};
   if (keyOrder) {
     keyOrder.forEach((key) => {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
