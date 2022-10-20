@@ -1,4 +1,4 @@
-import { injectImportsToFile } from '@m-cli/shared-utils';
+import { injectImportsToFile } from '@micro-cli/shared-utils';
 import GeneratorAPI from './GeneratorAPI';
 import writeFileTree from './writeFileTree';
 import type { answersTypes, packageTypes, resolvePluginsType } from '../types';

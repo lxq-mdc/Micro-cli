@@ -3,7 +3,7 @@ import fs from 'node:fs';
 // import path from 'path';
 
 export const compile = (templatePath: string, data: any) =>
-  // const templatePosition = `@m-cli/cli-plugin-eslint/generator/templates/react/${templateName}`
+  // const templatePosition = `@micro-cli/cli-plugin-eslint/generator/templates/react/${templateName}`
   new Promise((resolve, reject) => {
     ejs.renderFile(templatePath, { data }, {}, (err, result) => {
       if (err) {

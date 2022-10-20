@@ -2,7 +2,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import ejs from 'ejs';
 import { globby } from 'globby';
-import { injectImportsToFile } from '@m-cli/shared-utils';
+import { injectImportsToFile } from '@micro-cli/shared-utils';
 import Generator from './Generator';
 import { answersTypes, packageTypes } from '../types';
 
@@ -10,7 +10,7 @@ function extractCallDir(source: string, projectName: string, plugin: string) {
   const cwd = process.cwd();
   return path.join(
     cwd,
-    `./${projectName}/node_modules/@m-cli/${plugin}/generator/${source}`
+    `./${projectName}/node_modules/@micro-cli/${plugin}/generator/${source}`
   );
 }
 

@@ -1,4 +1,4 @@
-import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
+import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
 
 export default (api: GeneratorAPI) => {
   api.extendPackage({

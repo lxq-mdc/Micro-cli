@@ -1,4 +1,4 @@
-import { chalk } from '@m-cli/shared-utils';
+import { chalk } from '@micro-cli/shared-utils';
 import type { answersTypes } from '../../types';
 import type PromptModuleAPI from '../promptModuleAPI';
 
@@ -22,7 +22,7 @@ export default (cli: PromptModuleAPI) => {
   cli.onPromptComplete((answers: answersTypes, options: any) => {
     if (answers.features?.includes('router')) {
       // eslint-disable-next-line no-param-reassign
-      options.plugins['@m-cli/cli-plugin-router'] = {};
+      options.plugins['@micro-cli/cli-plugin-router'] = {};
     }
   });
 };

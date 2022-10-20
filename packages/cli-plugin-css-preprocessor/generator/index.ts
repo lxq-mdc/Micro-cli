@@ -1,6 +1,6 @@
-import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
-import { answersTypes } from '@m-cli/create/types';
-import { DeleteUndefinedInUnion } from '@m-cli/shared-utils';
+import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
+import { answersTypes } from '@micro-cli/create/types';
+import { DeleteUndefinedInUnion } from '@micro-cli/shared-utils';
 
 const preprocessorVersion = {
   sass: '^1.55.0',

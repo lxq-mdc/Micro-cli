@@ -1,19 +1,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { program } from 'commander';
 import fs from 'node:fs';
-import { chalk, semver } from '@m-cli/shared-utils';
-import create from '@m-cli/create';
+import { chalk, semver } from '@micro-cli/shared-utils';
+import create from '@micro-cli/create';
 import minimist from 'minimist';
-import add from '@m-cli/add';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import add from '@micro-cli/add';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 import type { OptionsTypes } from '../types';
 
-// const requiredVersion = require('../package.json').engines.node;
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
+
+// console.log(path.resolve(__dirname, '../package.json'));
+
 const requiredVersion = JSON.parse(
-  fs.readFileSync(path.resolve(dirname, '../package.json'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')
 ).engines.node;
 
 function checkNodeVersion(wanted: string, id: string) {
@@ -27,7 +31,7 @@ function checkNodeVersion(wanted: string, id: string) {
   }
 }
 
-checkNodeVersion(requiredVersion, '@m-cli');
+checkNodeVersion(requiredVersion, '@micro-cli');
 
 /** @description 创建项目 */
 program
@@ -51,7 +55,7 @@ program
   .command('addPage <page-name>')
   .description('add page from template')
   .option('-f,--force', 'overwrite target directory if it exists')
-  .action((projectName, options) => {
+  .action((projectName: string, options: { OptionsTypes: boolean }) => {
     add(projectName, options, 'src/pages');
   });
 
@@ -60,7 +64,7 @@ program
   .command('addComponent <page-name>')
   .description('add component from template')
   .option('-f,--force', 'overwrite target directory if it exists')
-  .action((projectName, options) => {
+  .action((projectName: string, options: { OptionsTypes: boolean }) => {
     add(projectName, options, 'src/components');
   });
 

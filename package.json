@@ -1,17 +1,27 @@
 {
-  "name": "m-cli",
-  "version": "1.2.0",
-  "description": "",
+  "name": "micro-cli",
+  "version": "1.0.0",
+  "description": "A Cli to quickly create modern Vite-based web app.",
   "main": "index.js",
   "type": "module",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "dev:core": "pnpm --filter \"@m-cli/core\" run dev",
-    "build": "pnpm -F \"@m-cli/*\" run build"
+    "dev:core": "pnpm --filter \"@micro-cli/core\" run dev",
+    "build": "pnpm -F \"@micro-cli/*\" run build",
+    "clear": "rimraf 'packages/*/{dist,node_modules}' && rimraf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
   },
-  "keywords": [],
+  "keywords": [
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -26,6 +36,7 @@
     "ora": "^6.1.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.0",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^9.0.2",
     "@types/minimist": "^1.2.2",

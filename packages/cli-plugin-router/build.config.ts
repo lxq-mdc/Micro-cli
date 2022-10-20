@@ -5,4 +5,5 @@ export default defineBuildConfig({
   entries: ['./generator/index'],
   // Generates .d.ts declaration file
   declaration: true,
+  failOnWarn: false,
 });

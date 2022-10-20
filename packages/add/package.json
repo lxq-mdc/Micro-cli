@@ -1,21 +1,29 @@
 {
-  "name": "@m-cli/add",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/add",
+  "version": "1.0.3",
+  "description": "A Cli for quickly creating components based on modern web app.",
   "main": "./dist/index.mjs",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/add"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "add",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "MYY1106",
   "license": "MIT",
-  "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild"
-  },
   "dependencies": {
-    "@m-cli/shared-utils": "workspace:*"
+    "@micro-cli/shared-utils": "^1.0.3"
   }
 }

@@ -9,7 +9,7 @@ import {
   compile,
   writeToFile,
   getCssPreProcessor,
-} from '@m-cli/shared-utils';
+} from '@micro-cli/shared-utils';
 
 export default async (componentName: string, options: {}, pathName: string) => {
   if (!(await isRoot())) return; // 如果不在根目录，无法创建

@@ -33,7 +33,7 @@ export default (cli: PromptModuleAPI) => {
   cli.onPromptComplete((answers: any, options: any) => {
     if (answers.cssPreprocessor) {
       // eslint-disable-next-line no-param-reassign
-      options.plugins['@m-cli/cli-plugin-css-preprocessor'] = {};
+      options.plugins['@micro-cli/cli-plugin-css-preprocessor'] = {};
     }
   });
 };

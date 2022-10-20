@@ -1,14 +1,26 @@
 {
-  "name": "@m-cli/cli-plugin-eslint",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/cli-plugin-eslint",
+  "version": "1.0.3",
+  "description": "eslint plugin for micro-cli",
   "main": "./dist/index.mjs",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/cli-plugin-eslint"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
+  "keywords": [
+    "eslint",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "zl-mdc",
+  "license": "MIT",
   "dependencies": {
-    "@m-cli/create": "workspace:^1.0.0",
-    "@m-cli/shared-utils": "workspace:^1.0.0"
+    "@micro-cli/create": "^1.0.3",
+    "@micro-cli/shared-utils": "^1.0.3"
   },
   "scripts": {
     "dev": "unbuild --stub",

@@ -2,15 +2,15 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import figlet from 'figlet';
 import inquirer from 'inquirer';
-import type { OptionsTypes } from '@m-cli/core/types';
+import type { OptionsTypes } from '@micro-cli/core/types';
 import validateProjectName from 'validate-npm-package-name';
-import { chalk, exit, clear } from '@m-cli/shared-utils';
+import { chalk, exit, clear } from '@micro-cli/shared-utils';
 import type { correctNameResult, errorNameResult } from './types/index';
 import Creator from './Creator';
 
 async function create(projectName: string, options: OptionsTypes) {
   const cwd: string = process.cwd();
-  const inCurrent: boolean = projectName === '.';
+  const inCurrent: boolean = projectName === '.'; // 是否是在该目录中直接创建项目
   const name: string = inCurrent ? path.relative('../', cwd) : projectName;
   const targetDir: string = path.resolve(cwd, projectName || '.');
 

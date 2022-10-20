@@ -1,17 +1,29 @@
 {
-  "name": "@m-cli/cli-plugin-router",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/cli-plugin-router",
+  "version": "1.0.3",
+  "description": "router plugin for micro-cli",
   "main": "./dist/index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/cli-plugin-router"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "router",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "MYY1106",
+  "license": "MIT",
   "dependencies": {
-    "@m-cli/create": "workspace:^1.0.0",
-    "@m-cli/shared-utils": "workspace:*"
+    "@micro-cli/create": "^1.0.3",
+    "@micro-cli/shared-utils": "^1.0.3"
   }
 }

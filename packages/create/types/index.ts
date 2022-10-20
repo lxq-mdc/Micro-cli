@@ -36,15 +36,15 @@ export type featureType = Omit<
 >;
 
 export interface presetPluginsTypes {
-  '@m-cli/cli-plugin-eslint': {
+  '@micro-cli/cli-plugin-eslint': {
     config: 'airbnb' | 'standard';
     lintOn: Array<'save' | 'commit'>;
   };
-  '@m-cli/cli-plugin-router': any;
-  '@m-cli/cli-service': any;
-  '@m-cli/cli-plugin-cssPreprocessors': any;
-  '@m-cli/cli-plugin-typescript': any;
-  '@m-cli/cli-plugin-gitHooks': any;
+  '@micro-cli/cli-plugin-router': any;
+  '@micro-cli/cli-service': any;
+  '@micro-cli/cli-plugin-cssPreprocessors': any;
+  '@micro-cli/cli-plugin-typescript': any;
+  '@micro-cli/cli-plugin-git-hooks': any;
 }
 
 export interface resolvePluginsType {
@@ -55,7 +55,7 @@ export interface resolvePluginsType {
   answers: answersTypes;
 }
 
-// export type depsTypes='@m-cli/cli-plugin-eslint'| '@m-cli/cli-plugin-typescript'|'@m-cli/cli-service'
+// export type depsTypes='@micro-cli/cli-plugin-eslint'| '@micro-cli/cli-plugin-typescript'|'@micro-cli/cli-service'
 export type depsTypes = keyof presetPluginsTypes;
 export interface presetTypes {
   useConfigFiles: boolean;

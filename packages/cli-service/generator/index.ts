@@ -1,5 +1,5 @@
-import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
-import { answersTypes } from '@m-cli/create/types';
+import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
+import { answersTypes } from '@micro-cli/create/types';
 
 export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   const hasTypeScript = answers.features?.includes('TypeScript');

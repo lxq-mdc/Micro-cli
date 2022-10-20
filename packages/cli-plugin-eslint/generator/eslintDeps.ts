@@ -1,4 +1,4 @@
-import { answersTypes } from '@m-cli/create/types';
+import { answersTypes } from '@micro-cli/create/types';
 
 type Index = 'common' | 'base' | 'airbnb' | 'standard';
 

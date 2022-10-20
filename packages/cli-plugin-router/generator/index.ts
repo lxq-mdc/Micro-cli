@@ -1,10 +1,10 @@
-import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
-import { answersTypes } from '@m-cli/create/types';
+import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
+import { answersTypes } from '@micro-cli/create/types';
 import {
   injectRootOptionInVue,
   replaceNodeInJSX,
   replaceNodeInVue,
-} from '@m-cli/shared-utils';
+} from '@micro-cli/shared-utils';
 
 const addRouter = {
   React: (api: GeneratorAPI, historyMode: boolean, isTypescript: boolean) => {

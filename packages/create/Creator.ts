@@ -12,13 +12,12 @@ import {
   chalk,
   wrapLoading,
   commandSpawn,
-} from '@m-cli/shared-utils';
-import type { OptionsTypes } from '@m-cli/core/types';
+} from '@micro-cli/shared-utils';
+import type { OptionsTypes } from '@micro-cli/core/types';
 import PromptModuleAPI from './lib/promptModuleAPI';
-import getPromptModules from './lib/getPromptModules';
+import promptModules from './lib/promptModules';
 import writeFileTree from './lib/writeFileTree';
 import sortObject from './lib/sortObject';
-
 import type {
   PromptType,
   presetTypes,
@@ -49,8 +48,8 @@ class Creator extends EventTarget {
     this.name = name;
     this.targetDir = targetDir;
     const { presetPrompt, featurePrompt } = this.resolveIntroPrompts();
-    this.presetPrompt = presetPrompt;
-    this.featurePrompt = featurePrompt;
+    this.presetPrompt = presetPrompt; // 选择框架
+    this.featurePrompt = featurePrompt; // 选择feature
 
     this.injectedPrompts = [];
     this.promptCompleteCbs = [];
@@ -58,13 +57,13 @@ class Creator extends EventTarget {
     this.answers = { preset: 'React' };
 
     const promptAPI = new PromptModuleAPI(this);
-    getPromptModules().forEach((m: any) => m(promptAPI));
+    promptModules.forEach((m: any) => m(promptAPI));
   }
 
   // eslint-disable-next-line class-methods-use-this
   async create(cliOptions = {}) {
     const preset: presetTypes = await this.promptAndResolvePreset();
-    preset.plugins['@m-cli/cli-service'] = {
+    preset.plugins['@micro-cli/cli-service'] = {
       projectName: this.name,
       ...preset,
     };
@@ -87,9 +86,7 @@ class Creator extends EventTarget {
     const deps: string[] = Object.keys(preset.plugins);
     deps.forEach((dep) => {
       // pkg.devDependencies[dep]='latest'
-      (pkg.devDependencies as any)[
-        dep
-      ] = `link:D:/Desktop/m-cli/ts_cli/packages/${dep.slice(7)}`;
+      (pkg.devDependencies as any)[dep] = `^1.0.0`;
     });
     writeFileTree(this.targetDir, {
       'package.json': JSON.stringify(pkg, null, 2),
@@ -106,7 +103,8 @@ class Creator extends EventTarget {
         '.npmrc': pnpmConfig,
       });
     }
-    // intilaize git repository before installing deps
+
+    // initialize git repository before installing deps
     // so that vue-cli-service can setup git hooks.
     const shouldInitGit = this.shouldInitGit(cliOptions);
     if (shouldInitGit) {
@@ -126,7 +124,6 @@ class Creator extends EventTarget {
     const plugins: Array<resolvePluginsType> = await this.resolvePlugins(
       preset.plugins
     );
-
     // 创建Generator实例
     const generator = new Generator(this.targetDir, {
       pkg,
@@ -155,10 +152,10 @@ class Creator extends EventTarget {
         ` ${chalk.gray('$')} ${
           // eslint-disable-next-line no-nested-ternary
           packageManager === 'yarn'
-            ? 'yarn serve'
+            ? 'yarn run dev'
             : packageManager === 'pnpm'
-            ? 'pnpm run serve'
-            : 'npm run serve'
+            ? 'pnpm run dev'
+            : 'npm run dev'
         }`
       )}`
     );
@@ -171,7 +168,7 @@ class Creator extends EventTarget {
   ): Promise<Array<resolvePluginsType>> {
     // ensure cli-service is invoked first
     // eslint-disable-next-line no-param-reassign
-    rawPlugins = sortObject(rawPlugins, ['@m-cli/cli-service'], true);
+    rawPlugins = sortObject(rawPlugins, ['@micro-cli/cli-service'], true);
     const plugins: any = [];
     // eslint-disable-next-line no-empty, no-restricted-syntax
     for (const id of Object.keys(rawPlugins)) {

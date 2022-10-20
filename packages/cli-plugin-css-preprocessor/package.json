@@ -1,17 +1,29 @@
 {
-  "name": "@m-cli/cli-plugin-css-preprocessor",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/cli-plugin-css-preprocessor",
+  "version": "1.0.3",
+  "description": "css preprocessor plugin for micro-cli",
   "main": "./dist/index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/cli-plugin-css-preprocessor"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "css-preprocessor",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "MYY1106",
+  "license": "MIT",
   "dependencies": {
-    "@m-cli/create": "workspace:^1.0.0",
-    "@m-cli/shared-utils": "workspace:*"
+    "@micro-cli/create": "^1.0.3",
+    "@micro-cli/shared-utils": "^1.0.3"
   }
 }

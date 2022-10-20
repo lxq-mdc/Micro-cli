@@ -1,10 +1,15 @@
 {
-  "name": "@m-cli/core",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/core",
+  "version": "1.0.3",
+  "description": "A Cli to quickly create modern Vite-based web app.",
   "main": "./dist/index.mjs",
   "type": "module",
-  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
@@ -12,13 +17,19 @@
   "bin": {
     "m": "./index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "core",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "MYY1106",
   "license": "MIT",
   "dependencies": {
-    "@m-cli/add": "workspace:1.0.0",
-    "@m-cli/create": "workspace:1.0.0",
-    "@m-cli/shared-utils": "workspace:*",
+    "@micro-cli/add": "^1.0.3",
+    "@micro-cli/create": "^1.0.3",
+    "@micro-cli/shared-utils": "^1.0.3",
     "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
     "fs-extra": "^10.1.0",

@@ -1,14 +1,26 @@
 {
-  "name": "@m-cli/shared-utils",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/shared-utils",
+  "version": "1.0.3",
+  "description": "shared utils for micro-cli",
   "main": "./dist/index.mjs",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/shared-utils"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
   },
-  "keywords": [],
+  "keywords": [
+    "shared-utils",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {

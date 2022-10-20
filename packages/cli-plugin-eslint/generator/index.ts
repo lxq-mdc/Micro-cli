@@ -1,6 +1,6 @@
 import fs from 'node:fs';
-import GeneratorAPI from '@m-cli/create/lib/GeneratorAPI';
-import { answersTypes } from '@m-cli/create/types';
+import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
+import { answersTypes } from '@micro-cli/create/types';
 import path from 'node:path';
 import { getDeps } from './eslintDeps';
 import config from './eslintOptions';

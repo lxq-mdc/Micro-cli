@@ -1,16 +1,28 @@
 {
-  "name": "@m-cli/cli-service",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@micro-cli/cli-service",
+  "version": "1.0.3",
+  "description": "service plugin for micro-cli",
   "main": "./dist/index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-mdc/Micro-cli.git",
+    "directory": "packages/cli-service"
+  },
+  "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "service",
+    "micro-cli",
+    "cli",
+    "react",
+    "vue"
+  ],
+  "author": "zl-mdc",
+  "license": "MIT",
   "dependencies": {
-    "@m-cli/create": "workspace:^1.0.0"
+    "@micro-cli/create": "^1.0.3"
   }
 }

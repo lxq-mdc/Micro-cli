@@ -10,7 +10,7 @@ export default (cli: PromptModuleAPI) => {
   cli.onPromptComplete((answers: answersTypes, options: any) => {
     if (answers.features?.includes('gitHooks')) {
       // eslint-disable-next-line no-param-reassign
-      options.plugins['@m-cli/cli-plugin-gitHooks'] = {};
+      options.plugins['@micro-cli/cli-plugin-git-hooks'] = {};
     }
   });
 };

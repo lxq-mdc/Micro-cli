@@ -38,7 +38,7 @@ export default (cli: PromptModuleAPI) => {
   cli.onPromptComplete((answers: answersTypes, options: any) => {
     if (answers.features?.includes('linter')) {
       // eslint-disable-next-line no-param-reassign
-      options.plugins['@m-cli/cli-plugin-eslint'] = {
+      options.plugins['@micro-cli/cli-plugin-eslint'] = {
         config: answers.eslintConfig,
       };
     }
