@@ -60,7 +60,6 @@ export default class GeneratorAPI {
       const allFiles = await globby(['**/*'], { cwd: baseDir, dot: true });
       // eslint-disable-next-line no-restricted-syntax
       for (const rawPath of allFiles) {
-        console.log('rawPath', rawPath);
         const sourcePath = path.resolve(baseDir, rawPath);
         // eslint-disable-next-line no-await-in-loop
         const content = await renderFile(
