@@ -12,7 +12,7 @@ const addRouter = {
     const extension = isTypescript ? 'tsx' : 'jsx';
 
     api.extendPackage({
-      devDependencies: {
+      dependencies: {
         'react-router-dom': '^6.4.2',
       },
     });
@@ -61,7 +61,7 @@ const addRouter = {
     const extension = isTypescript ? 'ts' : 'js';
 
     api.extendPackage({
-      devDependencies: {
+      dependencies: {
         'vue-router': '^4.1.5',
       },
     });

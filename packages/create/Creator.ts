@@ -1,4 +1,5 @@
 import inquirer from 'inquirer';
+// import path from 'node:path';
 import {
   hasPnpm3OrLater,
   hasYarn,
@@ -8,6 +9,9 @@ import {
   hasProjectGit,
   execa,
   loadModule,
+  chalk,
+  wrapLoading,
+  commandSpawn,
 } from '@m-cli/shared-utils';
 import type { OptionsTypes } from '@m-cli/core/types';
 import PromptModuleAPI from './lib/promptModuleAPI';
@@ -28,17 +32,17 @@ import Generator from './lib/Generator';
 class Creator extends EventTarget {
   private name: string;
 
-  targetDir: string;
+  public targetDir: string;
 
-  private featurePrompt: PromptType;
+  public featurePrompt: PromptType;
 
-  private injectedPrompts: Array<PromptType>;
+  public injectedPrompts: Array<PromptType>;
 
   private presetPrompt: PromptType;
 
-  private promptCompleteCbs: Array<onPromptCompleteCbsType>;
+  public promptCompleteCbs: Array<onPromptCompleteCbsType>;
 
-  answers: answersTypes;
+  private answers: answersTypes;
 
   constructor(name: string, targetDir: string) {
     super();
@@ -54,7 +58,7 @@ class Creator extends EventTarget {
     this.answers = { preset: 'React' };
 
     const promptAPI = new PromptModuleAPI(this);
-    getPromptModules().forEach((m) => m(promptAPI));
+    getPromptModules().forEach((m: any) => m(promptAPI));
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -70,6 +74,8 @@ class Creator extends EventTarget {
       : hasYarn()
       ? 'yarn'
       : 'npm';
+
+    console.log(`✨  Creating project in ${chalk.yellow(this.targetDir)}.`);
     // eslint-disable-next-line no-unused-vars
     const pkg = {
       name: this.name,
@@ -104,9 +110,18 @@ class Creator extends EventTarget {
     // so that vue-cli-service can setup git hooks.
     const shouldInitGit = this.shouldInitGit(cliOptions);
     if (shouldInitGit) {
+      console.log(`🗃  Initializing git repository...`);
       await execa('git init', { cwd: this.targetDir });
-      await execa(`${packageManager} install`, { cwd: this.targetDir });
     }
+
+    // install plugins
+    console.log();
+    await wrapLoading(
+      () => commandSpawn(packageManager, ['install'], { cwd: this.targetDir }),
+      `⚙\u{fe0f}  `
+    );
+
+    console.log(`🚀  Invoking generators...`);
     // 5.遍历插件，generator方法设置为插件的apply方法
     const plugins: Array<resolvePluginsType> = await this.resolvePlugins(
       preset.plugins
@@ -121,6 +136,33 @@ class Creator extends EventTarget {
 
     // 调用generator的generate方法
     await generator.generate();
+
+    // commandSpawn
+    await wrapLoading(
+      () => commandSpawn(packageManager, ['install'], { cwd: this.targetDir }),
+      `📦  `
+    );
+
+    console.log(`🎉  Successfully created project ${chalk.yellow(this.name)}.`);
+
+    console.log();
+    console.log(
+      `👉  Get started with the following commands:\n\n${
+        this.targetDir === process.cwd()
+          ? ``
+          : chalk.cyan(` ${chalk.gray('$')} cd ${this.name}\n`)
+      }${chalk.cyan(
+        ` ${chalk.gray('$')} ${
+          // eslint-disable-next-line no-nested-ternary
+          packageManager === 'yarn'
+            ? 'yarn serve'
+            : packageManager === 'pnpm'
+            ? 'pnpm run serve'
+            : 'npm run serve'
+        }`
+      )}`
+    );
+    // await execa(`${packageManager} install`, { cwd: this.targetDir });
   }
 
   // { id: options } => [{ id, apply, options }]
@@ -130,7 +172,6 @@ class Creator extends EventTarget {
     // ensure cli-service is invoked first
     // eslint-disable-next-line no-param-reassign
     rawPlugins = sortObject(rawPlugins, ['@m-cli/cli-service'], true);
-    console.log('rawPlugins', rawPlugins);
     const plugins: any = [];
     // eslint-disable-next-line no-empty, no-restricted-syntax
     for (const id of Object.keys(rawPlugins)) {
@@ -144,7 +185,6 @@ class Creator extends EventTarget {
 
   async promptAndResolvePreset() {
     const answers: answersTypes = await inquirer.prompt(this.getFinalPrompts());
-    console.log('answers', answers);
     this.answers = answers;
     const preset = {
       useConfigFiles: true,

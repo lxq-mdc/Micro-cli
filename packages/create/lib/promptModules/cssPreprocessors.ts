@@ -1,4 +1,7 @@
-export default (cli: any) => {
+import type { answersTypes } from '../../types';
+import type PromptModuleAPI from '../promptModuleAPI';
+
+export default (cli: PromptModuleAPI) => {
   cli.injectFeature({
     name: 'css-preprocessor',
     value: 'css-preprocessor',
@@ -7,8 +10,8 @@ export default (cli: any) => {
 
   cli.injectPrompt({
     name: 'cssPreprocessor',
-    when: (answers: { features: string | string[] }) =>
-      answers.features.includes('css-preprocessor'),
+    when: (answers: answersTypes) =>
+      answers.features?.includes('css-preprocessor')!,
     type: 'list',
     message: `Pick a CSS pre-processor`,
     choices: [

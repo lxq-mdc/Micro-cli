@@ -7,7 +7,6 @@ export const compile = (templatePath: string, data: any) =>
   new Promise((resolve, reject) => {
     ejs.renderFile(templatePath, { data }, {}, (err, result) => {
       if (err) {
-        console.log('err', err);
         reject(err);
       }
       return resolve(result);

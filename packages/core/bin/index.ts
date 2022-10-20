@@ -43,8 +43,6 @@ program
         )
       );
     }
-    console.log('options', options);
-
     create(projectName, options);
   });
 

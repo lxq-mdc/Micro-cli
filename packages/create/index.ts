@@ -1,9 +1,10 @@
 import path from 'node:path';
 import fs from 'fs-extra';
+import figlet from 'figlet';
 import inquirer from 'inquirer';
 import type { OptionsTypes } from '@m-cli/core/types';
 import validateProjectName from 'validate-npm-package-name';
-import { chalk, exit } from '@m-cli/shared-utils';
+import { chalk, exit, clear } from '@m-cli/shared-utils';
 import type { correctNameResult, errorNameResult } from './types/index';
 import Creator from './Creator';
 
@@ -70,6 +71,18 @@ async function create(projectName: string, options: OptionsTypes) {
   if (!inCurrent) {
     await fs.mkdir(targetDir);
   }
+  clear();
+  console.log(
+    chalk.yellow(
+      figlet.textSync('M-CLI', {
+        horizontalLayout: 'full',
+        font: '3D-ASCII',
+        verticalLayout: 'default',
+        width: 150,
+        whitespaceBreak: true,
+      })
+    )
+  );
   const creator = new Creator(name, targetDir);
   await creator.create(options);
 }

@@ -1,6 +1,8 @@
 import { chalk } from '@m-cli/shared-utils';
+import type { answersTypes } from '../../types';
+import type PromptModuleAPI from '../promptModuleAPI';
 
-export default (cli: any) => {
+export default (cli: PromptModuleAPI) => {
   cli.injectFeature({
     name: 'Router',
     value: 'router',
@@ -9,7 +11,7 @@ export default (cli: any) => {
 
   cli.injectPrompt({
     name: 'historyMode',
-    when: (answers: any) => answers.features.includes('router'),
+    when: (answers: answersTypes) => answers.features?.includes('router')!,
     type: 'confirm',
     message: `Use history mode for router? ${chalk.yellow(
       `(Requires proper server setup for index fallback in production)`
@@ -17,8 +19,8 @@ export default (cli: any) => {
     description: `By using the HTML5 History API, the URLs don't need the '#' character anymore.`,
   });
 
-  cli.onPromptComplete((answers: any, options: any) => {
-    if (answers.features.includes('router')) {
+  cli.onPromptComplete((answers: answersTypes, options: any) => {
+    if (answers.features?.includes('router')) {
       // eslint-disable-next-line no-param-reassign
       options.plugins['@m-cli/cli-plugin-router'] = {};
     }

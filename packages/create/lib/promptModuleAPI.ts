@@ -1,22 +1,24 @@
-import type { featureType, PromptType } from '../types';
+import Creator from '../Creator';
+import type { featureType, promptCompleteCbsType, PromptType } from '../types';
 
 export default class PromptModuleAPI {
-  creator: any;
+  creator: Creator;
 
-  constructor(creator: any) {
+  constructor(creator: Creator) {
     this.creator = creator;
   }
 
   // injectFeature 的作用是将功能特性注册到 Creator 实例中
   injectFeature(feature: featureType) {
-    this.creator.featurePrompt.choices.push(feature);
+    this.creator.featurePrompt.choices?.push(feature);
   }
 
   injectPrompt(prompt: PromptType) {
     this.creator.injectedPrompts.push(prompt);
   }
 
-  onPromptComplete(cb: any) {
+  // eslint-disable-next-line no-unused-vars
+  onPromptComplete(cb: promptCompleteCbsType) {
     this.creator.promptCompleteCbs.push(cb);
   }
 }

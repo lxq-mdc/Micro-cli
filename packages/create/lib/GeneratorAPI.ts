@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 import ejs from 'ejs';
 import { globby } from 'globby';
 import { injectImportsToFile } from '@m-cli/shared-utils';
@@ -15,9 +15,12 @@ function extractCallDir(source: string, projectName: string, plugin: string) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function renderFile(name: string, data: any) {
+async function renderFile(
+  name: string,
+  data: { [index: string]: string }
+): Promise<string> {
   const template = fs.readFileSync(name, 'utf-8');
-  return ejs.render(template);
+  return ejs.render(template, { data });
 }
 
 export default class GeneratorAPI {
@@ -46,33 +49,44 @@ export default class GeneratorAPI {
   }
 
   // eslint-disable-next-line no-unused-vars
-  render(source: string, options: any) {
-    const { plugin } = options;
+  render(
+    source: string,
+    options: { [index: string]: string | { [index: string]: string } }
+  ) {
+    const { plugin, data } = options;
     const { projectName } = this.options;
-    const baseDir = extractCallDir(source, projectName, plugin);
-    this.injectFileMiddleware(async (files: any) => {
+    const baseDir = extractCallDir(source, projectName, plugin as string);
+    this.injectFileMiddleware(async (files: Record<string, string>) => {
       const allFiles = await globby(['**/*'], { cwd: baseDir, dot: true });
-      console.log('allFiles', allFiles);
       // eslint-disable-next-line no-restricted-syntax
       for (const rawPath of allFiles) {
+        console.log('rawPath', rawPath);
         const sourcePath = path.resolve(baseDir, rawPath);
-        const content = renderFile(sourcePath, this.options);
+        // eslint-disable-next-line no-await-in-loop
+        const content = await renderFile(
+          sourcePath,
+          data as { [index: string]: string }
+        );
         // eslint-disable-next-line no-param-reassign
         files[rawPath] = content;
       }
     });
   }
 
-  private injectFileMiddleware(middleware: any) {
+  // eslint-disable-next-line no-unused-vars
+  private injectFileMiddleware(
+    // eslint-disable-next-line no-unused-vars
+    middleware: (files: Record<string, string>) => Promise<void>
+  ) {
     this.generator.fileMiddlewares.push(middleware);
   }
 
   extendPackage(fields: Partial<packageTypes>) {
     // eslint-disable-next-line guard-for-in, no-restricted-syntax
     for (const key in fields) {
-      (this.generator.pkg as any)[key] = {
-        ...(this.generator.pkg as any)[key],
-        ...(fields as any)[key],
+      (this.generator.pkg as Partial<packageTypes>)[key] = {
+        ...(this.generator.pkg as Partial<packageTypes>)[key],
+        ...(fields as Partial<packageTypes>)[key],
       };
     }
   }

@@ -7,19 +7,6 @@ export interface errorNameResult {
 
 export type correctNameResult = Omit<errorNameResult, 'errors' | 'warnings'>;
 
-export interface PromptType {
-  name: string;
-  type: string;
-  value?: string;
-  description?: string;
-  message: string;
-  choices?: Array<any>;
-  pageSize?: number;
-}
-export type featureType = Omit<
-  PromptType,
-  'type' | 'message' | 'pageSize' | 'choices'
->;
 export interface answersTypes {
   preset: 'React' | 'Vue';
   features?: Array<
@@ -29,6 +16,24 @@ export interface answersTypes {
   eslintConfig?: 'airbnb' | 'base' | 'standard' | 'prettier';
   historyMode?: boolean;
 }
+
+export interface PromptType {
+  name: string;
+  type: string;
+  value?: string;
+  description?: string;
+  message: string;
+  choices?: Array<any>;
+  pageSize?: number;
+  plugins?: Array<string>;
+  checked?: boolean;
+  // eslint-disable-next-line no-unused-vars
+  when?: (answers: answersTypes) => boolean;
+}
+export type featureType = Omit<
+  PromptType,
+  'type' | 'message' | 'pageSize' | 'choices'
+>;
 
 export interface presetPluginsTypes {
   '@m-cli/cli-plugin-eslint': {
@@ -70,9 +75,10 @@ export interface packageTypes {
   version: string;
   type: string;
   scripts: {
-    dev: string;
-    build: string;
-    preview: string;
+    dev?: string;
+    build?: string;
+    preview?: string;
+    [prop: string]: any;
   };
   dependencies: {
     [prop: string]: string;
@@ -80,4 +86,14 @@ export interface packageTypes {
   devDependencies: {
     [prop: string]: string;
   };
+  husky: any;
+  config: any;
+  'lint-staged': any;
+  [index: string]: any;
 }
+
+// eslint-disable-next-line no-unused-vars
+export type promptCompleteCbsType = (
+  answers: answersTypes,
+  options: any
+) => void;
