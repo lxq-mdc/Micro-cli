@@ -90,6 +90,9 @@ const addRouter = {
 
     api.render(`./template/template-vue${isTypescript ? '-ts' : ''}`, {
       plugin: 'cli-plugin-router',
+      data: {
+        history: historyMode ? 'createWebHistory' : 'createWebHashHistory',
+      },
     });
   },
 };
