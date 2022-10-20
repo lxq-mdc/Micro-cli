@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
-import microLogo from './assets/micro-cli.png';
+import microLogo from './assets/micro-cli.svg';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div>
-         <a href="#" target="_blank">
+         <a href="https://github.com/zl-mdc/m-cli" target="_blank">
           <img src={microLogo} className="logo" alt="micro logo" />
         </a>
          <a href="https://vitejs.dev" target="_blank">

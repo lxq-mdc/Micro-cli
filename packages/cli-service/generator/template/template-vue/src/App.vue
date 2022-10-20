@@ -6,8 +6,8 @@ import HelloWorld from './components/HelloWorld.vue';
 
 <template>
   <div>
-    <a href="#" target="_blank">
-      <img src="./assets/micro-cli.png" class="logo" alt="Micro Cli logo" />
+    <a href="https://github.com/zl-mdc/m-cli" target="_blank">
+      <img src="./assets/micro-cli.svg" class="logo" alt="Micro Cli logo" />
     </a>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
