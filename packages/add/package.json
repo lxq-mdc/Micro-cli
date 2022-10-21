@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/add",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Cli for quickly creating components based on modern web app.",
   "main": "./dist/index.mjs",
   "type": "module",
@@ -24,6 +24,6 @@
   "author": "MYY1106",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/shared-utils": "^1.0.3"
+    "@micro-cli/shared-utils": "^1.0.4"
   }
 }

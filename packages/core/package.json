@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Cli to quickly create modern Vite-based web app.",
   "main": "./dist/index.mjs",
   "type": "module",
@@ -27,9 +27,9 @@
   "author": "MYY1106",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/add": "^1.0.3",
-    "@micro-cli/create": "^1.0.3",
-    "@micro-cli/shared-utils": "^1.0.3",
+    "@micro-cli/add": "^1.0.4",
+    "@micro-cli/create": "^1.0.4",
+    "@micro-cli/shared-utils": "^1.0.4",
     "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
     "fs-extra": "^10.1.0",

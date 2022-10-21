@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-plugin-css-preprocessor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "css preprocessor plugin for micro-cli",
   "main": "./dist/index.mjs",
   "repository": {
@@ -23,7 +23,7 @@
   "author": "MYY1106",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/create": "^1.0.3",
-    "@micro-cli/shared-utils": "^1.0.3"
+    "@micro-cli/create": "^1.0.4",
+    "@micro-cli/shared-utils": "^1.0.4"
   }
 }

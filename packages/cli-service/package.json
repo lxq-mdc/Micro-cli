@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "service plugin for micro-cli",
   "main": "./dist/index.mjs",
   "repository": {
@@ -23,6 +23,6 @@
   "author": "zl-mdc",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/create": "^1.0.3"
+    "@micro-cli/create": "^1.0.4"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/create",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Cli to quickly create modern Vite-based web app.",
   "main": "./dist/index.mjs",
   "type": "module",
@@ -24,9 +24,9 @@
   "author": "zl-mdc",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/cli-plugin-eslint": "^1.0.3",
-    "@micro-cli/core": "^1.0.3",
-    "@micro-cli/shared-utils": "^1.0.3",
+    "@micro-cli/cli-plugin-eslint": "^1.0.4",
+    "@micro-cli/core": "^1.0.4",
+    "@micro-cli/shared-utils": "^1.0.4",
     "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^8.0.0",
