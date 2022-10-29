@@ -1,4 +1,3 @@
-import path from 'path';
 import {
   isRoot,
   isTypescript,
@@ -10,6 +9,13 @@ import {
   writeToFile,
   getCssPreProcessor,
 } from '@micro-cli/shared-utils';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
 
 export default async (componentName: string, options: {}, pathName: string) => {
   if (!(await isRoot())) return; // 如果不在根目录，无法创建
@@ -23,7 +29,12 @@ export default async (componentName: string, options: {}, pathName: string) => {
     case 'Vue': {
       if (!(await ensureFile(`${dirName}.vue`, options))) return; // 确保所需文件，如果有相同名字的，则向用户询问是否覆盖，以保证下面的操作可以进行，若不覆盖，则不执行下面的操作
       const vue = await compile(
-        path.resolve(__dirname, './templates/vue-component.ejs'),
+        path.resolve(
+          __dirname,
+          process.env.NODE_ENV === 'production'
+            ? '../lib/templates/vue-component.ejs'
+            : './templates/vue-component.ejs'
+        ),
         {
           name: componentName,
           isTypescript: isTs,

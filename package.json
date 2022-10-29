@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "dev:core": "pnpm --filter \"@micro-cli/core\" run dev",
+    "dev": "pnpm -F \"@micro-cli/*\" run dev",
     "build": "pnpm -F \"@micro-cli/*\" run build",
-    "clear": "rimraf 'packages/*/{dist,node_modules}' && rimraf node_modules",
+    "clear": "rimraf \"packages/*/node_modules\" && rimraf \"packages/*/dist\" && rimraf \"node_modules\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && pnpm release:only",
@@ -43,6 +44,7 @@
     "@types/node": "^18.8.3",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",

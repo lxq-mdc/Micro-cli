@@ -5,9 +5,9 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   const hasTypeScript = answers.features?.includes('TypeScript');
   if (answers.preset === 'React') {
     if (hasTypeScript) {
-      api.render('./template/template-react-ts', { plugin: 'cli-service' });
+      api.render('../template/template-react-ts', { plugin: 'cli-service' });
     } else {
-      api.render('./template/template-react', {
+      api.render('../template/template-react', {
         plugin: 'cli-service',
         data: {
           name: 'micro_cli',
@@ -34,9 +34,9 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
     });
   } else if (answers.preset === 'Vue') {
     if (hasTypeScript) {
-      api.render('./template/template-vue-ts', { plugin: 'cli-service' });
+      api.render('../template/template-vue-ts', { plugin: 'cli-service' });
     } else {
-      api.render('./template/template-vue', { plugin: 'cli-service' });
+      api.render('../template/template-vue', { plugin: 'cli-service' });
     }
     api.extendPackage({
       scripts: {

@@ -25,5 +25,5 @@ export default (api: GeneratorAPI) => {
       '*.{js,css,md,tsx,ts,less,json,vue}': 'prettier --write',
     },
   });
-  api.render('./template', { plugin: 'cli-plugin-gitHooks' });
+  api.render('../template', { plugin: 'cli-plugin-gitHooks' });
 };

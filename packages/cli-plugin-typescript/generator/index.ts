@@ -4,7 +4,7 @@ import { answersTypes } from '@micro-cli/create/types';
 export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   const hasTypeScript = answers.features?.includes('TypeScript');
   if (hasTypeScript && answers.preset === 'React') {
-    api.render('./template/template-react-ts', {
+    api.render('../template/template-react-ts', {
       plugin: 'cli-plugin-typescript',
     });
     api.extendPackage({
@@ -13,7 +13,7 @@ export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
       },
     });
   } else {
-    api.render('./template/template-vue-ts', {
+    api.render('../template/template-vue-ts', {
       plugin: 'cli-plugin-typescript',
     });
     api.extendPackage({

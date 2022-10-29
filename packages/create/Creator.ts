@@ -88,6 +88,7 @@ class Creator extends EventTarget {
       // pkg.devDependencies[dep]='latest'
       (pkg.devDependencies as any)[dep] = `^1.0.0`;
     });
+
     writeFileTree(this.targetDir, {
       'package.json': JSON.stringify(pkg, null, 2),
     });

@@ -12,6 +12,7 @@ importers:
       '@typescript-eslint/parser': ^5.39.0
       clear: ^0.1.0
       commander: ^9.4.0
+      cross-env: ^7.0.3
       cz-conventional-changelog: ^3.3.0
       download-git-repo: ^3.0.2
       ejs: ^3.1.8
@@ -48,6 +49,7 @@ importers:
       '@types/node': 18.11.2
       '@typescript-eslint/eslint-plugin': 5.40.1_3xixdb6szekvzr7amvogkc65h4
       '@typescript-eslint/parser': 5.40.1_3rubbgt5ekhqrcgx4uwls3neim
+      cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       eslint: 7.32.0
       eslint-config-airbnb-base: 15.0.0_kyhpsrbe64bd6cvqex3h66nkm4
@@ -62,57 +64,57 @@ importers:
 
   packages/add:
     specifiers:
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/shared-utils': workspace:*
     dependencies:
       '@micro-cli/shared-utils': link:../shared-utils
 
   packages/cli-plugin-css-preprocessor:
     specifiers:
-      '@micro-cli/create': ^1.0.0
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/create': workspace:*
+      '@micro-cli/shared-utils': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
       '@micro-cli/shared-utils': link:../shared-utils
 
   packages/cli-plugin-eslint:
     specifiers:
-      '@micro-cli/create': ^1.0.0
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/create': workspace:*
+      '@micro-cli/shared-utils': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
       '@micro-cli/shared-utils': link:../shared-utils
 
-  packages/cli-plugin-gitHooks:
+  packages/cli-plugin-git-hooks:
     specifiers:
-      '@micro-cli/create': ^1.0.0
+      '@micro-cli/create': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
 
   packages/cli-plugin-router:
     specifiers:
-      '@micro-cli/create': ^1.0.0
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/create': workspace:*
+      '@micro-cli/shared-utils': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
       '@micro-cli/shared-utils': link:../shared-utils
 
   packages/cli-plugin-typescript:
     specifiers:
-      '@micro-cli/create': ^1.0.0
+      '@micro-cli/create': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
 
   packages/cli-service:
     specifiers:
-      '@micro-cli/create': ^1.0.0
+      '@micro-cli/create': workspace:*
     dependencies:
       '@micro-cli/create': link:../create
 
   packages/core:
     specifiers:
-      '@micro-cli/add': ^1.0.0
-      '@micro-cli/create': ^1.0.0
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/add': workspace:*
+      '@micro-cli/create': workspace:*
+      '@micro-cli/shared-utils': workspace:*
       '@types/fs-extra': ^9.0.13
       '@types/minimist': ^1.2.2
       fs-extra: ^10.1.0
@@ -128,9 +130,9 @@ importers:
 
   packages/create:
     specifiers:
-      '@micro-cli/cli-plugin-eslint': ^1.0.0
-      '@micro-cli/core': ^1.0.0
-      '@micro-cli/shared-utils': ^1.0.0
+      '@micro-cli/cli-plugin-eslint': workspace:*
+      '@micro-cli/core': workspace:*
+      '@micro-cli/shared-utils': workspace:*
       '@types/figlet': ^1.5.5
       '@types/fs-extra': ^9.0.13
       '@types/glob': ^8.0.0
@@ -3967,6 +3969,17 @@ packages:
       }
     dev: true
     optional: true
+
+  /cross-env/7.0.3:
+    resolution:
+      {
+        integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==,
+      }
+    engines: { node: '>=10.14', npm: '>=6', yarn: '>=1' }
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+    dev: true
 
   /cross-spawn/5.1.0:
     resolution:

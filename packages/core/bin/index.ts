@@ -14,8 +14,6 @@ const __filename = fileURLToPath(import.meta.url);
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(__filename);
 
-// console.log(path.resolve(__dirname, '../package.json'));
-
 const requiredVersion = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')
 ).engines.node;

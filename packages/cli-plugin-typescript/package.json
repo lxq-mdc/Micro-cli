@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-plugin-typescript",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "typescript plugin for micro-cli",
   "main": "./dist/index.js",
   "repository": {
@@ -23,6 +23,6 @@
   "author": "zl-mdc",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/create": "^1.0.4"
+    "@micro-cli/create": "workspace:*"
   }
 }

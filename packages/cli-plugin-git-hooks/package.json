@@ -1,12 +1,12 @@
 {
   "name": "@micro-cli/cli-plugin-git-hooks",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "git hooks plugin for micro-cli",
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zl-mdc/Micro-cli.git",
-    "directory": "packages/cli-plugin-gitHooks"
+    "directory": "packages/cli-plugin-git-hooks"
   },
   "homepage": "https://github.com/zl-mdc/Micro-cli.git#readme",
   "scripts": {
@@ -23,6 +23,6 @@
   "author": "zl-mdc",
   "license": "MIT",
   "dependencies": {
-    "@micro-cli/create": "^1.0.4"
+    "@micro-cli/create": "workspace:*"
   }
 }

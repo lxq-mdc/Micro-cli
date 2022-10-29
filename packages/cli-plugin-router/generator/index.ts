@@ -53,7 +53,7 @@ const addRouter = {
         }) || code
     );
 
-    api.render(`./template/template-react${isTypescript ? '-ts' : ''}`, {
+    api.render(`../template/template-react${isTypescript ? '-ts' : ''}`, {
       plugin: 'cli-plugin-router',
     });
   },
@@ -88,7 +88,7 @@ const addRouter = {
       )
     );
 
-    api.render(`./template/template-vue${isTypescript ? '-ts' : ''}`, {
+    api.render(`../template/template-vue${isTypescript ? '-ts' : ''}`, {
       plugin: 'cli-plugin-router',
       data: {
         history: historyMode ? 'createWebHistory' : 'createWebHashHistory',
