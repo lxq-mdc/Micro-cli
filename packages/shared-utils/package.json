@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/shared-utils",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "shared utils for micro-cli",
   "main": "./dist/index.mjs",
   "type": "module",
@@ -26,10 +26,7 @@
   "dependencies": {
     "@babel/core": "^7.19.3",
     "@types/babel__core": "^7.1.19",
-    "@types/chalk": "^2.2.0",
     "@types/clear": "^0.1.2",
-    "@types/ora": "^3.2.0",
-    "@types/read-pkg": "^5.1.0",
     "chalk": "2.4.2",
     "clear": "^0.1.0",
     "ejs": "^3.1.8",

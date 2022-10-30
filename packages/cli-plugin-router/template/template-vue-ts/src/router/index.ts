@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: <%= data.history %>(<% if (data.history) { -%>process.env.BASE_URL<% } -%>),
+  history: <%= data.history %>(),
   routes
 });
 

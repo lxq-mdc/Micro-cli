@@ -29,12 +29,7 @@ export default async (componentName: string, options: {}, pathName: string) => {
     case 'Vue': {
       if (!(await ensureFile(`${dirName}.vue`, options))) return; // 确保所需文件，如果有相同名字的，则向用户询问是否覆盖，以保证下面的操作可以进行，若不覆盖，则不执行下面的操作
       const vue = await compile(
-        path.resolve(
-          __dirname,
-          process.env.NODE_ENV === 'production'
-            ? '../lib/templates/vue-component.ejs'
-            : './templates/vue-component.ejs'
-        ),
+        path.resolve(__dirname, '../templates/vue-component.ejs'),
         {
           name: componentName,
           isTypescript: isTs,
@@ -48,7 +43,7 @@ export default async (componentName: string, options: {}, pathName: string) => {
     case 'React': {
       if (!(await ensureDir(dirName, options))) return; // 确保所需目录，如果有相同名字的，则向用户询问是否覆盖，以保证下面的操作可以进行，若不覆盖，则不执行下面的操作
       const xml = await compile(
-        path.resolve(__dirname, './templates/react-component.ejs'),
+        path.resolve(__dirname, '../templates/react-component.ejs'),
         {
           name: componentName,
           isTypescript: isTs,
@@ -56,7 +51,7 @@ export default async (componentName: string, options: {}, pathName: string) => {
         }
       );
       const style = await compile(
-        path.resolve(__dirname, './templates/react-style.ejs'),
+        path.resolve(__dirname, '../templates/react-style.ejs'),
         {
           name: componentName,
         }

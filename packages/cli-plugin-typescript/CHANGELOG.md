@@ -1,5 +1,13 @@
 # @micro-cli/cli-plugin-typescript
 
+## 1.0.7
+
+### Patch Changes
+
+- fix template bug
+- Updated dependencies
+  - @micro-cli/create@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

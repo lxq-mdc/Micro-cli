@@ -1,5 +1,15 @@
 # @micro-cli/create
 
+## 1.0.7
+
+### Patch Changes
+
+- fix template bug
+- Updated dependencies
+  - @micro-cli/shared-utils@1.0.7
+  - @micro-cli/core@1.0.7
+  - @micro-cli/cli-plugin-eslint@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @micro-cli/cli-plugin-eslint
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @micro-cli/create@1.0.7
+  - @micro-cli/shared-utils@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

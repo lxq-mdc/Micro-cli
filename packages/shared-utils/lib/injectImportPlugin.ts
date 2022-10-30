@@ -93,11 +93,8 @@ export default (
 
         path.traverse({
           ImportDeclaration: (importPath) => {
-            console.log('--------------', importPath.toString());
-            console.log(unImportedOptions);
-            Object.keys(unImportedOptions).forEach((requireSource, index) => {
+            Object.keys(unImportedOptions).forEach((requireSource) => {
               if (importPath.node.source.value === requireSource) {
-                console.log(index, requireSource);
                 // eslint-disable-next-line no-use-before-define
                 addImportInOldStatement(
                   importPath,
@@ -139,11 +136,6 @@ export default (
         defaultImport = option.key;
       }
     });
-    console.log(
-      `import ${`${defaultImport} `} ${
-        namedImport.length > 0 ? `{${namedImport.join(',')}}` : ''
-      } from '${requireSource}'`
-    );
     const newNode = template.statement(
       `import ${`${defaultImport} `} ${
         namedImport.length > 0 ? `{${namedImport.join(',')}}` : ''
@@ -156,7 +148,6 @@ export default (
       }
       return false;
     });
-    console.log(path.get(`body.${nodeIndex}`));
     (
       path.get(`body.${nodeIndex}`) as BabelCore.NodePath<BabelCore.types.Node>
     ).insertBefore(newNode);
@@ -168,13 +159,11 @@ export default (
     arr: NewOption[]
   ) {
     let statement = importPath.toString();
-    console.log(requireSource, arr);
     arr.forEach((option) => {
       if (option.kind === 'named') {
         statement = `${statement.split('}')[0]}, ${
           option.key
         } } from '${requireSource}'`;
-        console.log(statement);
       } else {
         statement = `import ${option.key},{${statement.split('{')}`;
       }

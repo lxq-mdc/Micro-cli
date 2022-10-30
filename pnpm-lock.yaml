@@ -166,12 +166,9 @@ importers:
     specifiers:
       '@babel/core': ^7.19.3
       '@types/babel__core': ^7.1.19
-      '@types/chalk': ^2.2.0
       '@types/clear': ^0.1.2
       '@types/ejs': ^3.1.1
       '@types/npmlog': ^4.1.4
-      '@types/ora': ^3.2.0
-      '@types/read-pkg': ^5.1.0
       '@types/semver': ^7.3.12
       chalk: 2.4.2
       clear: ^0.1.0
@@ -187,10 +184,7 @@ importers:
     dependencies:
       '@babel/core': 7.19.6
       '@types/babel__core': 7.1.19
-      '@types/chalk': 2.2.0
       '@types/clear': 0.1.2
-      '@types/ora': 3.2.0
-      '@types/read-pkg': 5.1.0
       chalk: 2.4.2
       clear: 0.1.0
       ejs: 3.1.8
@@ -2447,16 +2441,6 @@ packages:
       '@babel/types': 7.19.4
     dev: false
 
-  /@types/chalk/2.2.0:
-    resolution:
-      {
-        integrity: sha512-1zzPV9FDe1I/WHhRkf9SNgqtRJWZqrBWgu7JGveuHmmyR9CnAPCie2N/x+iHrgnpYBIcCJWHBoMRv2TRWktsvw==,
-      }
-    deprecated: This is a stub types definition for chalk (https://github.com/chalk/chalk). chalk provides its own type definitions, so you don't need @types/chalk installed!
-    dependencies:
-      chalk: 5.1.2
-    dev: false
-
   /@types/clear/0.1.2:
     resolution:
       {
@@ -2608,16 +2592,6 @@ packages:
       }
     dev: true
 
-  /@types/ora/3.2.0:
-    resolution:
-      {
-        integrity: sha512-jll99xUKpiFbIFZSQcxm4numfsLaOWBzWNaRk3PvTSE7BPqTzzOCFmS0mQ7m8qkTfmYhuYbehTGsxkvRLPC++w==,
-      }
-    deprecated: This is a stub types definition. ora provides its own type definitions, so you do not need this installed.
-    dependencies:
-      ora: 6.1.2
-    dev: false
-
   /@types/parse-json/4.0.0:
     resolution:
       {
@@ -2625,16 +2599,6 @@ packages:
       }
     dev: true
     optional: true
-
-  /@types/read-pkg/5.1.0:
-    resolution:
-      {
-        integrity: sha512-YOrcNByG1rPqIMhEMC1xU4SeFHcvQmHkl8yT6M4qPr+8eM1OBxRFJWog2uO+kx5Ept48Wdv+DuriUAVMC+LbQA==,
-      }
-    deprecated: This is a stub types definition. read-pkg provides its own type definitions, so you do not need this installed.
-    dependencies:
-      read-pkg: 7.1.0
-    dev: false
 
   /@types/resolve/1.17.1:
     resolution:

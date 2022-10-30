@@ -47,7 +47,9 @@ export default class Generator {
     this.plugins.forEach((plugin) => {
       const { id, apply, options, answers } = plugin;
       const api = new GeneratorAPI(id, this, options, this.answers);
-      apply(api, options, answers);
+      if (typeof apply === 'function') apply(api, options, answers);
+      // @ts-ignore
+      else apply.default(api, options, answers);
     });
   }
 

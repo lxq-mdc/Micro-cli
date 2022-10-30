@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-plugin-git-hooks",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "git hooks plugin for micro-cli",
   "main": "./dist/index.js",
   "repository": {

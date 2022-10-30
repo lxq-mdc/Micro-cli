@@ -1,3 +1,9 @@
+<template>
+  <h1>
+    <%= data.name %>
+  </h1>
+</template>
+
 <% if (data.isTypescript) { -%>
 <script setup lang="ts">
 
@@ -7,10 +13,6 @@
   
 </script>
 <% } -%>
-
-<template>
-  <h1><%= data.name %></h1>
-</template>
 
 <% if (data.cssPreProcessor) { -%>
 <style scoped lang="<%= data.cssPreProcessor %>">
