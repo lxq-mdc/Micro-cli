@@ -32,3 +32,5 @@ export { default as injectRootOptionInVue } from './lib/injectRootOptionInVue';
 export { default as getCssPreProcessor } from './lib/getCssPreProcessor';
 export { default as wrapLoading } from './lib/wrapLoading';
 export { default as commandSpawn } from './lib/commandSpawn';
+export { default as injectHookInReact } from './lib/injectHookInReact';
+export { default as injectRouterInReact } from './lib/injectRouterNodeInReact';

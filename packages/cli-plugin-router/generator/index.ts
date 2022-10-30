@@ -1,6 +1,8 @@
 import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
 import { answersTypes } from '@micro-cli/create/types';
 import {
+  injectRouterInReact,
+  injectHookInReact,
   injectRootOptionInVue,
   replaceNodeInJSX,
   replaceNodeInVue,
@@ -17,14 +19,21 @@ const addRouter = {
       },
     });
 
+    api.injectImports(`src/main.${extension}`, {
+      [routerNode]: {
+        require: 'react-router-dom',
+        kind: 'named',
+      },
+    });
+
+    api.injectModifyCodeSnippetCb(`src/main.${extension}`, (code) =>
+      injectRouterInReact(code, routerNode)
+    );
+
     api.injectImports(`src/App.${extension}`, {
       routes: {
         require: './router',
         kind: 'default',
-      },
-      [routerNode]: {
-        require: 'react-router-dom',
-        kind: 'named',
       },
       Route: {
         require: 'react-router-dom',
@@ -36,20 +45,27 @@ const addRouter = {
       },
     });
 
+    api.injectModifyCodeSnippetCb(`src/App.${extension}`, (code) =>
+      injectHookInReact(
+        code,
+        {
+          useRoutes: {
+            require: 'react-router-dom',
+            kind: 'named',
+          },
+        },
+        {
+          statement: 'const elements = useRoutes(routes);',
+        }
+      )
+    );
+
     api.injectModifyCodeSnippetCb(
       `src/App.${extension}`,
       (code) =>
         replaceNodeInJSX(code, {
           className: 'App',
-          statements: [
-            `<${routerNode}>
-    <Routes>
-      {routes.map(item => {
-        return <Route key={item.path} {...item}></Route>;
-      })}
-    </Routes>
-</${routerNode}>`,
-          ],
+          statements: [`{elements}`],
         }) || code
     );
 
