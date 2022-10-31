@@ -6,47 +6,41 @@ const config = (answers: answersTypes) => {
   const defaultConfig: {
     [index: string]: any;
   } = {
-    root: true,
     env: {
       browser: true,
-      commonjs: true,
-      es6: true,
-      node: true,
-      jest: true,
+      es2021: true,
     },
     extends: [
-      'eslint:recommended',
-      `plugin:${preset.toLocaleLowerCase()}/recommended`,
-    ] as Array<string>,
-  };
-  if (eslintConfig === 'airbnb') {
-    defaultConfig.extends.push('airbnb');
-  } else if (eslintConfig === 'standard') {
-    defaultConfig.extends.push('standard');
-  } else {
-    defaultConfig.extends.push('plugin:prettier/recommended');
-  }
-  const parserOptions = {
-    parser: 'Babel-eslint',
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
+      `plugin:${
+        preset === 'React' ? 'React/recommended' : 'vue/vue3-essential'
+      }`,
+      `${eslintConfig}`,
+    ],
+    overrides: [],
+    parserOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
+    plugins: [`${preset.toLowerCase()}`],
+    rules: {},
   };
+
+  if (eslintConfig === 'airbnb' && preset === 'Vue') {
+    defaultConfig.extends = ['plugin:vue/vue3-essential', 'airbnb-base'];
+  }
+  if (eslintConfig === 'base') {
+    defaultConfig.extends[1] = 'eslint:recommended';
+  }
   if (isHasTypeScript) {
-    defaultConfig.extends.push('plugin:@typescript-eslint/recommended');
-    if (preset === 'React') {
-      defaultConfig.parser = '@typescript-eslint/parser';
-    } else {
-      defaultConfig.parserOptions = Object.assign(parserOptions, {
-        parser: '@typescript-eslint/parser',
+    if (eslintConfig === 'standard') {
+      defaultConfig.extends[1] = 'standard-with-typescript';
+    } else if (eslintConfig === 'xo') {
+      defaultConfig.extends[1] = 'xo';
+      defaultConfig.overrides.push({
+        extends: ['xo-typescript'],
+        files: ['*.ts', '*.tsx'],
       });
     }
-  } else if (preset === 'React') {
-    defaultConfig.parser = 'babel-eslint';
-  } else {
-    defaultConfig.parserOptions = parserOptions;
   }
 
   return defaultConfig;
