@@ -1,9 +1,10 @@
 import fs from 'node:fs';
+// @micro-cli/create/lib/GeneratorAPI
 import GeneratorAPI from '@micro-cli/create/lib/GeneratorAPI';
 import { answersTypes } from '@micro-cli/create/types';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'url';
-import { getDeps } from './eslintDeps';
+import getDeps from './eslintDeps';
 import config from './eslintOptions';
 
 // eslint-disable-next-line no-underscore-dangle

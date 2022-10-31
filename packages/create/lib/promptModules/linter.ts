@@ -9,9 +9,12 @@ export default (cli: PromptModuleAPI) => {
     plugins: ['eslint'],
     checked: true,
   });
+
   cli.injectPrompt({
     name: 'eslintConfig',
-    when: (answers: answersTypes) => answers.features?.includes('linter')!,
+    when: (answers: answersTypes) =>
+      answers.features?.includes('linter')! &&
+      answers.features?.includes('TypeScript')!,
     type: 'list',
     message: 'Pick a linter / formatter config:',
     description:
@@ -23,6 +26,36 @@ export default (cli: PromptModuleAPI) => {
         short: 'Basic',
       },
       {
+        name: 'ESLint + Standard config',
+        value: 'standard',
+        short: 'Standard',
+      },
+      {
+        name: 'ESLint + XO config',
+        value: 'xo',
+        short: 'Standard',
+      },
+    ],
+  });
+
+  cli.injectPrompt({
+    name: 'eslintConfig',
+    when: (answers: answersTypes) =>
+      answers.features?.includes('linter')! &&
+      !answers.features?.includes('TypeScript')!,
+    type: 'list',
+    message: 'Pick a linter / formatter config:',
+    description:
+      'Checking code errors and enforcing an homogeoneous code style is recommended.',
+    choices: [
+      {
+        name: 'ESLint with error prevention only',
+        value: 'base',
+        when: (answers: answersTypes) =>
+          answers.features?.includes('TypeScript')!,
+        short: 'Basic',
+      },
+      {
         name: 'ESLint + Airbnb config',
         value: 'airbnb',
         short: 'Airbnb',
@@ -31,6 +64,11 @@ export default (cli: PromptModuleAPI) => {
         name: 'ESLint + Standard config',
         value: 'standard',
         short: 'Standard',
+      },
+      {
+        name: 'ESLint + XO config',
+        value: 'xo',
+        short: 'XO',
       },
     ],
   });

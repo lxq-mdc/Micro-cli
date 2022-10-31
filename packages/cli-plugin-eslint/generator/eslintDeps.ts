@@ -1,82 +1,111 @@
 import { answersTypes } from '@micro-cli/create/types';
 
-type Index = 'common' | 'base' | 'airbnb' | 'standard';
+type Index = 'common' | 'base' | 'airbnb' | 'standard' | 'xo';
 
-const DEPS_MAP: {
-  [index: string]: {
-    // eslint-disable-next-line no-unused-vars
-    [k in Index]?: {
-      [index: string]: string;
-    };
-  };
-} = {
-  React: {
-    common: {
-      prettier: '^2.7.1',
-      eslint: '^8.20.0',
-      'eslint-config-prettier': '^8.5.0',
-      'eslint-plugin-babel': '^5.3.1',
-      'eslint-plugin-prettier': '^4.2.1',
-      'eslint-plugin-react': '^7.30.1',
-      'eslint-plugin-react-hooks': '^4.6.0',
-    },
-    base: {
-      'babel-eslint': '^10.1.0',
-      'eslint-plugin-html': '^7.1.0',
-    },
-    airbnb: {
-      'eslint-config-airbnb': '^19.0.4',
-      'eslint-plugin-import': '^2.26.0',
-      'eslint-plugin-jsx-a11y': '^6.6.1',
-    },
-    standard: {
-      'eslint-config-standard': '^17.0.0',
-      'eslint-config-standard-react': '^11.0.1',
-      'eslint-plugin-import': '^2.26.0',
-      'eslint-plugin-n': '^15.0.0',
-      'eslint-plugin-node': '^11.1.0',
-      'eslint-plugin-promise': '^6.1.0',
-      'eslint-plugin-standard': '^5.0.0',
-    },
-  },
-  Vue: {
-    common: {
-      eslint: '^8.23.0',
-      'eslint-plugin-vue': '^9.4.0',
-    },
-    base: {
-      prettier: '^2.7.1',
-      'eslint-config-prettier': '^8.5.0',
-      'eslint-plugin-prettier': '^4.2.1',
-    },
-    airbnb: {
-      'eslint-config-airbnb-base': '^15.0.0',
-      'eslint-plugin-import': '^2.25.2',
-    },
-    standard: {
-      'eslint-config-standard': '^17.0.0',
-      'eslint-plugin-import': '^2.25.2',
-      'eslint-plugin-n': '^15.0.0',
-      'eslint-plugin-promise': '^6.0.0',
-    },
-  },
-  TypeScript: {
-    common: {
-      '@typescript-eslint/eslint-plugin': '^5.30.7',
-      '@typescript-eslint/parser': '^5.30.7',
-    },
-  },
-};
 const getDeps = (answers: answersTypes) => {
   const { eslintConfig, preset } = answers;
+
+  const DEPS_MAP: {
+    [index: string]: {
+      // eslint-disable-next-line no-unused-vars
+      [k in Index]?: {
+        [index: string]: string;
+      };
+    };
+  } = {
+    React: {
+      base: {
+        'babel-eslint': '^10.1.0',
+        'eslint-plugin-html': '^7.1.0',
+        prettier: '^2.7.1',
+        eslint: '^8.0.1',
+        'eslint-plugin-react': '^7.31.10',
+      },
+      xo: {
+        'eslint-config-xo': '^0.42.0',
+        'eslint-plugin-react': '^7.31.10',
+        ...(answers.features?.includes('TypeScript')
+          ? {
+              '@typescript-eslint/eslint-plugin': '>=5.31.0',
+              '@typescript-eslint/parser': '>=5.31.0',
+              'eslint-config-xo-typescript': '^0.53.0',
+              eslint: '>=8.0.0',
+            }
+          : {
+              eslint: '>=8.14.0',
+            }),
+      },
+      airbnb: {
+        eslint: '^7.32.0 || ^8.2.0',
+        'eslint-config-airbnb': '^19.0.4',
+        'eslint-plugin-import': '^2.25.3',
+        'eslint-plugin-jsx-a11y': '^6.5.1',
+        'eslint-plugin-react-hooks': '^4.3.0',
+        'eslint-plugin-react': '^7.28.0',
+      },
+      standard: {
+        'eslint-plugin-import': '^2.25.2',
+        'eslint-plugin-n': '^15.0.0',
+        'eslint-plugin-promise': '^6.0.0',
+        'eslint-plugin-react': '^7.31.10',
+        eslint: '^8.0.1',
+        ...(answers.features?.includes('TypeScript')
+          ? {
+              '@typescript-eslint/eslint-plugin': '^5.0.0',
+              'eslint-config-standard-with-typescript': '^23.0.0',
+            }
+          : {
+              'eslint-config-standard': '^17.0.0',
+            }),
+      },
+    },
+    Vue: {
+      base: {
+        prettier: '^2.7.1',
+        'eslint-config-prettier': '^8.5.0',
+        'eslint-plugin-prettier': '^4.2.1',
+        eslint: '^8.23.0',
+        'eslint-plugin-vue': '^9.4.0',
+      },
+      airbnb: {
+        eslint: '^7.32.0 || ^8.2.0',
+        'eslint-config-airbnb-base': '^15.0.0',
+        'eslint-plugin-import': '^2.25.2',
+        'eslint-plugin-vue': '^9.6.0',
+      },
+      xo: {
+        'eslint-plugin-vue': '^9.6.0',
+        eslint: '>=8.0.0',
+        'eslint-config-xo': '^0.42.0',
+        ...(answers.features?.includes('TypeScript')
+          ? {
+              '@typescript-eslint/eslint-plugin': '>=5.31.0',
+              '@typescript-eslint/parser': '>=5.31.0',
+              'eslint-config-xo-typescript': '^0.53.0',
+            }
+          : null),
+      },
+      standard: {
+        eslint: '^8.0.1',
+        'eslint-plugin-vue': '^9.6.0',
+        'eslint-plugin-import': '^2.25.2',
+        'eslint-plugin-n': '^15.0.0',
+        'eslint-plugin-promise': '^6.0.0',
+        ...(answers.features?.includes('TypeScript')
+          ? {
+              '@typescript-eslint/eslint-plugin': '^5.0.0',
+              'eslint-config-standard-with-typescript': '^23.0.0',
+            }
+          : {
+              'eslint-config-standard': '^17.0.0',
+            }),
+      },
+    },
+  };
+
   const deps = {
-    ...DEPS_MAP[preset].common,
     ...DEPS_MAP[preset][eslintConfig! as Index],
   };
-  if (answers.features?.includes('TypeScript')) {
-    Object.assign(deps, DEPS_MAP.TypeScript.common);
-  }
-
   return deps;
 };
-export { DEPS_MAP, getDeps };
+export default getDeps;

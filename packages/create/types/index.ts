@@ -13,7 +13,7 @@ export interface answersTypes {
     'css-preprocessor' | 'linter' | 'TypeScript' | 'gitHooks' | 'router'
   >;
   cssPreprocessor?: 'less' | 'sass' | 'stylus';
-  eslintConfig?: 'airbnb' | 'base' | 'standard' | 'prettier';
+  eslintConfig?: 'airbnb' | 'base' | 'standard' | 'prettier' | 'xo';
   historyMode?: boolean;
 }
 
@@ -93,7 +93,7 @@ export interface packageTypes {
 }
 
 // eslint-disable-next-line no-unused-vars
-export type promptCompleteCbsType = (
-  answers: answersTypes,
-  options: any
-) => void;
+// export type promptCompleteCbsType = (
+//   answers: answersTypes,
+//   options: any
+// ) => void;
