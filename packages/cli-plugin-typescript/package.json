@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-plugin-typescript",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "typescript plugin for micro-cli",
   "main": "./dist/index.js",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Cli to quickly create modern Vite-based web app.",
   "main": "./dist/index.mjs",
   "type": "module",

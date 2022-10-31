@@ -1,5 +1,15 @@
 # @micro-cli/core
 
+## 1.0.8
+
+### Patch Changes
+
+- fix template bug
+- Updated dependencies
+  - @micro-cli/add@1.0.8
+  - @micro-cli/create@1.0.8
+  - @micro-cli/shared-utils@1.0.8
+
 ## 1.0.7
 
 ### Patch Changes

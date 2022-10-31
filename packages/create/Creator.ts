@@ -85,11 +85,7 @@ class Creator extends EventTarget {
     };
     const deps: string[] = Object.keys(preset.plugins);
     deps.forEach((dep) => {
-      // pkg.devDependencies[dep]='latest'
-      // (pkg.devDependencies as any)[dep] = `^1.0.0`;
-      (pkg.devDependencies as any)[
-        dep
-      ] = `link:D:/Desktop/m-cli/ts_cli/packages/${dep.slice(11)}`;
+      (pkg.devDependencies as any)[dep] = `^1.0.0`;
     });
 
     writeFileTree(this.targetDir, {

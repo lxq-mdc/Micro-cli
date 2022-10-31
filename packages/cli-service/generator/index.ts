@@ -3,14 +3,9 @@ import { answersTypes } from '@micro-cli/create/types';
 
 export default (api: GeneratorAPI, options: any, answers: answersTypes) => {
   const hasTypeScript = answers.features?.includes('TypeScript');
-  console.log('111111111111111111111111111');
 
   if (answers.preset === 'React') {
     if (hasTypeScript) {
-      console.log(
-        '-----------------------------------------------------------'
-      );
-
       api.render('../template/template-react-ts', { plugin: 'cli-service' });
     } else {
       api.render('../template/template-react', {

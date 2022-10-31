@@ -1,6 +1,6 @@
 {
   "name": "@micro-cli/cli-plugin-css-preprocessor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "css preprocessor plugin for micro-cli",
   "main": "./dist/index.mjs",
   "repository": {
