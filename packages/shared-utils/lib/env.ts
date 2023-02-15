@@ -46,7 +46,7 @@ export const hasGit = () => {
  */
 export const hasProjectGit = (cwd: string) => {
   try {
-    execSync('git --version', { stdio: 'ignore', cwd });
+    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore', cwd });
     return true;
   } catch (e) {
     return false;
